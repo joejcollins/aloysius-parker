@@ -23,19 +23,15 @@
         "vscode": {
             "settings": {},
             "extensions": [
-                "bierner.markdown-mermaid",
                 "charliermarsh.ruff",
                 "eamodio.gitlens",
                 "ms-python.black-formatter",
                 "ms-python.isort",
                 "ms-python.mypy-type-checker",
                 "ms-python.python",
-                "rangav.vscode-thunder-client",
-                "redhat.ansible",
-                "redhat.vscode-yaml",
+                "ms-vscode.makefile-tools",
                 "sourcery.sourcery",
-                "streetsidesoftware.code-spell-checker",
-                "tamasfe.even-better-toml"
+                "streetsidesoftware.code-spell-checker"
             ]
         }
     },
