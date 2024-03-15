@@ -1,0 +1,10 @@
+{
+    "editor.minimap.enabled": false,
+    "python.testing.pytestArgs": [
+      "./tests/"
+    ],
+    "terminal.integrated.scrollback": 100000,
+    "editor.detectIndentation": true,
+    "python.languageServer": "Pylance",
+    "python.defaultInterpreterPath": ".venv/bin/python"
+}

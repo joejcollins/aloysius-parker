@@ -1,0 +1,48 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flask API",
+            "type": "python",
+            "request": "launch",
+            "module": "gunicorn",
+            "args": [
+                "flask_api_v1_v2.main:FLASK_API",
+                "--config",
+                "./flask_api_v1_v2/gunicorn_conf.py",
+                "--workers",
+                "1",
+                "--timeout",
+                "3600"
+            ],
+            "jinja": true,
+            "justMyCode": false
+        },
+        {
+            "name": "Remote Attach",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 8080
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "."
+                }
+            ]
+        },
+        {
+            "name": "Debug One Test",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "args": [
+                "tests_unit/settings_test.py::test_settings"
+            ],
+            "justMyCode": false
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flask_forge"
+version = "0.1.0"
+authors = [
+  { name="Joe Collins", email="j.collins@zengenti.com" },
+]
+description = "."
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "black",
+    "debugpy",
+    "flask",
+    "gunicorn",
+    "mypy", 
+    "pip-tools",
+    "pytest-flask",
+    "pytest-mock",
+    "pytest",
+    "responses",
+    "ruff",
+    "setuptools",
+    "sourcery",
+]
+[tool.setuptools]
+py-modules = [
+    "src",
+]  #  Disable auto discovery of modules (and only include the ones we specifically want).
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.eggs
+    |\.git
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.ruff]
+select = ["F", "E", "W", "C90", "I"]
+fixable = ["ALL"]
+target-version = "py311"
+exclude = [
+    ".git",
+    ".github",
+    ".pytest_cache",
+    ".venv",
+    ".vscode",
+    "__pycache__"
+]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+follow_imports = "skip"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-q --disable-warnings --cache-clear"
+testpaths = [
+    "./tests"
+]

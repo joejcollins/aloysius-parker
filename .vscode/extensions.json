@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "charliermarsh.ruff",
+        "eamodio.gitlens",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "ms-python.mypy-type-checker",
+        "ms-python.python",
+        "ms-vscode.makefile-tools",
+        "sourcery.sourcery",
+        "streetsidesoftware.code-spell-checker",
+    ]
+}
