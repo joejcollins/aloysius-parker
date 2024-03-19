@@ -18,19 +18,20 @@ compile:  # Compile the requirements files using pip-tools.
 .PHONY: docs  # because there is a directory called docs.
 docs:  # Build the mkdocs documentation.
 	.venv/bin/python -m mkdocs build --clean
+	.venv/bin/python -m mkdocs serve
 
 flask:  # Run the Flask API server.
-	.venv/bin/python -m gunicorn flask_api_v1_v2.main:FLASK_API --config ./flask_api_v1_v2/gunicorn_conf.py $(ARGS)
+	.venv/bin/python -m gunicorn flask_forge.main:FLASK_API --config ./src/flask_forge/gunicorn_conf.py $(ARGS)
 
 format:  # Format the code with black.
 	.venv/bin/python -m black --config pyproject.toml .
 
 .PHONY: help
 help: # Show help for each of the makefile recipes.
-	@grep -E '^[a-zA-Z0-9 -]+:.*#'  makefile | sort | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
+	@grep -E '^[a-zA-Z0-9 -]+:.*#'  Makefile | sort | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
 
 lint:  # Lint the code with ruff, yamllint and ansible-lint.
-	.venv/bin/python -m ruff .
+	.venv/bin/python -m ruff check ./src
 
 mypy:  # Type check the code with mypy.
 	.venv/bin/python -m mypy ./src ./tests

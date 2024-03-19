@@ -21,6 +21,8 @@ dependencies = [
     "debugpy",
     "flask",
     "gunicorn",
+    "mkdocs",
+    "mkdocs-material",  # theme for the documentation.
     "mypy", 
     "pip-tools",
     "pytest-flask",
@@ -52,8 +54,8 @@ profile = "black"
 line_length = 88
 
 [tool.ruff]
-select = ["F", "E", "W", "C90", "I"]
-fixable = ["ALL"]
+lint.select = ["F", "E", "W", "C90", "I"]
+lint.fixable = ["ALL"]
 target-version = "py311"
 exclude = [
     ".git",
