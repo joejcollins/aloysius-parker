@@ -1,6 +1,6 @@
 """Test the dummy."""
 
-from src import dummy
+from flask_forge import dummy
 
 
 def test_dummy() -> None:

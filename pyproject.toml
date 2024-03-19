@@ -31,10 +31,10 @@ dependencies = [
     "setuptools",
     "sourcery",
 ]
-[tool.setuptools]
-py-modules = [
-    "src",
-]  #  Disable auto discovery of modules (and only include the ones we specifically want).
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
 
 [tool.black]
 line-length = 88

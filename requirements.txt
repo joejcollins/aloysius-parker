@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements.txt
 #
-black==24.2.0
+black==24.3.0
     # via flask_forge (pyproject.toml)
 blinker==1.7.0
     # via flask
@@ -78,7 +78,7 @@ requests==2.31.0
     # via responses
 responses==0.25.0
     # via flask_forge (pyproject.toml)
-ruff==0.3.2
+ruff==0.3.3
     # via flask_forge (pyproject.toml)
 sourcery==1.15.0
     # via flask_forge (pyproject.toml)
