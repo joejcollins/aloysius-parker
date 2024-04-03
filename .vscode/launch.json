@@ -2,8 +2,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Flask API",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "module": "gunicorn",
             "args": [
@@ -20,7 +27,7 @@
         },
         {
             "name": "Remote Attach",
-            "type": "python",
+            "type": "debugpy",
             "request": "attach",
             "connect": {
                 "host": "localhost",
@@ -35,12 +42,12 @@
         },
         {
             "name": "Debug One Test",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "module": "pytest",
             "console": "integratedTerminal",
             "args": [
-                "tests_unit/settings_test.py::test_settings"
+                "tests/dummy_test.py::test_dummy"
             ],
             "justMyCode": false
         }
