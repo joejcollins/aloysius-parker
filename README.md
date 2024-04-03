@@ -1,7 +1,11 @@
 # flask-forge
 
-Flask API training project.
+Flask API training project, based on the Udemy course:
+https://www.udemy.com/course/rest-api-flask-and-python/
 
-Build the virtual environment with `make venv`.
+## Setup
+In Codespaces:
+- Build the virtual environment with `make venv`
+- Verify the environment is setup correctly by doing `make test`
 
-To see other options `make`.
+To see other options, run `make`
