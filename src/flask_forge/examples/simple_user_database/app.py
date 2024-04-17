@@ -2,7 +2,8 @@ from datetime import datetime
 
 from flask import Flask, request, jsonify, make_response
 
-from .db import users, User
+from .db import users
+from .user import User
 
 # This is an example API server that features simple user registration, user retrieval, and user deletion
 START_TIME: datetime = datetime.now()
@@ -45,16 +46,9 @@ def register():
     name = data.get("name", None)
     email = data.get("email", None)
 
-    # Some basic validation checks. The User class already handles more complex checks
-    if not name:
-        return make_response(jsonify(error="name not provided"), 400)
-
-    if not email:
-        return make_response(jsonify(error="email not provided"), 400)
-
     # Create a new user object. This will error if the class doesn't like the data
     try:
-        user = User(data["name"], data["email"])
+        user = User(name, email)
         print(f"[{user.uuid}] {user.name} has been created")
     except ValueError as e:
         return make_response(jsonify(error=str(e)), 400)

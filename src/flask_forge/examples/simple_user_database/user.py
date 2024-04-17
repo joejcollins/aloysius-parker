@@ -9,6 +9,13 @@ class User:
     ALLOWED_EMAIL_PROVIDER_DOMAINS: set[str] = {"gmail.com", "mail.ru", "outlook.com"}
 
     def __init__(self, name: str, email: str):
+
+        if not name:
+            raise ValueError("Name cannot be empty")
+
+        if not email:
+            raise ValueError("Email cannot be empty")
+
         self.uuid: str = uuid4().hex
 
         # Username checking logic
