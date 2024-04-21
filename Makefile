@@ -21,7 +21,7 @@ docs:  # Build the mkdocs documentation.
 	.venv/bin/python -m mkdocs serve
 
 flask:  # Run the Flask API server.
-	.venv/bin/python -m gunicorn flask_forge.main:FLASK_API --config ./src/flask_forge/gunicorn_conf.py $(ARGS)
+	.venv/bin/python -m flask --app 'src/flask_forge/examples/blueprints/app.py' run
 
 format:  # Format the code with black.
 	.venv/bin/python -m black --config pyproject.toml .

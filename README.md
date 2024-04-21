@@ -11,12 +11,12 @@ To see other options, run `make`
 ## Running Flask API
 By default:
 1. Flask API looks for a file called `app.py` or `wsgi.py` in the directory it is ran in. The command to run the Flask API is `flask run`
-2. Flask API runs on **port 5000**, so your barebones application will be accessible via `http://127.0.0.1:5000/`
+2. Flask API runs on **port 5000**, so your bare bones application will be accessible via `http://127.0.0.1:5000/`
     - This can be changed using the `--port` argument variable, or the `PORT` environment variable.
 
 
 
-### Customising the filename
+### Customizing the filename
 If you wish to run Flask API under a different filename (assuming **main.py**) you may:
  - Pass the argument `--app=main.py` to the `flask run` command, like so: `flask --app 'main.py' run`
  - Use the `FLASK_APP` environment variable and assign the filename,

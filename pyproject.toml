@@ -20,6 +20,7 @@ dependencies = [
     "black",
     "debugpy",
     "flask",
+    "flask_smorest",
     "gunicorn",
     "mkdocs",
     "mkdocs-material",  # theme for the documentation.

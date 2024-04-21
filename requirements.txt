@@ -4,13 +4,15 @@
 #
 #    pip-compile --output-file=requirements.txt
 #
+apispec[marshmallow]==6.6.0
+    # via flask-smorest
 babel==2.14.0
     # via mkdocs-material
-black==24.3.0
+black==24.4.0
     # via flask_forge (pyproject.toml)
 blinker==1.7.0
     # via flask
-build==1.1.1
+build==1.2.1
     # via pip-tools
 certifi==2024.2.2
     # via requests
@@ -26,19 +28,22 @@ colorama==0.4.6
     # via mkdocs-material
 debugpy==1.8.1
     # via flask_forge (pyproject.toml)
-flask==3.0.2
+flask==3.0.3
     # via
+    #   flask-smorest
     #   flask_forge (pyproject.toml)
     #   pytest-flask
+flask-smorest==0.44.0
+    # via flask_forge (pyproject.toml)
 ghp-import==2.1.0
     # via mkdocs
-gunicorn==21.2.0
+gunicorn==22.0.0
     # via flask_forge (pyproject.toml)
-idna==3.6
+idna==3.7
     # via requests
 iniconfig==2.0.0
     # via pytest
-itsdangerous==2.1.2
+itsdangerous==2.2.0
     # via flask
 jinja2==3.1.3
     # via
@@ -55,13 +60,20 @@ markupsafe==2.1.5
     #   jinja2
     #   mkdocs
     #   werkzeug
+marshmallow==3.21.1
+    # via
+    #   apispec
+    #   flask-smorest
+    #   webargs
 mergedeep==1.3.4
-    # via mkdocs
+    # via
+    #   mkdocs
+    #   mkdocs-get-deps
 mkdocs==1.5.3
     # via
     #   flask_forge (pyproject.toml)
     #   mkdocs-material
-mkdocs-material==9.5.14
+mkdocs-material==9.5.18
     # via flask_forge (pyproject.toml)
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
@@ -73,11 +85,14 @@ mypy-extensions==1.0.0
     #   mypy
 packaging==24.0
     # via
+    #   apispec
     #   black
     #   build
     #   gunicorn
+    #   marshmallow
     #   mkdocs
     #   pytest
+    #   webargs
 paginate==0.5.6
     # via mkdocs-material
 pathspec==0.12.1
@@ -90,11 +105,12 @@ platformdirs==4.2.0
     # via
     #   black
     #   mkdocs
-pluggy==1.4.0
+    #   mkdocs-get-deps
+pluggy==1.5.0
     # via pytest
 pygments==2.17.2
     # via mkdocs-material
-pymdown-extensions==10.7.1
+pymdown-extensions==10.8
     # via mkdocs-material
 pyproject-hooks==1.0.0
     # via
@@ -107,19 +123,20 @@ pytest==8.1.1
     #   pytest-mock
 pytest-flask==1.3.0
     # via flask_forge (pyproject.toml)
-pytest-mock==3.12.0
+pytest-mock==3.14.0
     # via flask_forge (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via ghp-import
 pyyaml==6.0.1
     # via
     #   mkdocs
+    #   mkdocs-get-deps
     #   pymdown-extensions
     #   pyyaml-env-tag
     #   responses
 pyyaml-env-tag==0.1
     # via mkdocs
-regex==2023.12.25
+regex==2024.4.16
     # via mkdocs-material
 requests==2.31.0
     # via
@@ -127,13 +144,13 @@ requests==2.31.0
     #   responses
 responses==0.25.0
     # via flask_forge (pyproject.toml)
-ruff==0.3.3
+ruff==0.4.1
     # via flask_forge (pyproject.toml)
 six==1.16.0
     # via python-dateutil
-sourcery==1.15.0
+sourcery==1.16.0
     # via flask_forge (pyproject.toml)
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via mypy
 urllib3==2.2.1
     # via
@@ -141,9 +158,12 @@ urllib3==2.2.1
     #   responses
 watchdog==4.0.0
     # via mkdocs
-werkzeug==3.0.1
+webargs==8.4.0
+    # via flask-smorest
+werkzeug==3.0.2
     # via
     #   flask
+    #   flask-smorest
     #   pytest-flask
 wheel==0.43.0
     # via pip-tools

@@ -7,9 +7,11 @@
         "devcontainer",
         "devcontainers",
         "eamodio",
+        "Errno",
         "isort",
         "mypy",
         "sourcery",
-        "venv"
+        "venv",
+        "wsgi"
     ]
 }
