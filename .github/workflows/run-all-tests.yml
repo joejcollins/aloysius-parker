@@ -18,10 +18,11 @@ jobs:
         with:
           python-version: '3.11' 
       - name: Create the virtual environment and run tests.
+        env:
+          SOURCERY_TOKEN: ${{ secrets.SOURCERY_TOKEN }}
         run: |
           make venv
           make report
           make lint
+          printenv
           make test
-        env:
-          SOURCERY_TOKEN: ${{ secrets.SOURCERY_TOKEN }}
