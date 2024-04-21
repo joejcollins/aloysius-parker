@@ -1,0 +1,22 @@
+---
+name: Run the Python Tests
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  run_python_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo.
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+          clean: true
+      - name: Create the virtual environment and run tests.
+        run: |
+          make venv
+          make report
+          make lint
+          make test
