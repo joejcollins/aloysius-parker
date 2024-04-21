@@ -23,3 +23,5 @@ jobs:
           make report
           make lint
           make test
+        env:
+          SOURCERY_TOKEN: ${{ secrets.SOURCERY_TOKEN }}
