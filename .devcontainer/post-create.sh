@@ -1,2 +1,2 @@
 # Post create.
-uname -a
+make venv
