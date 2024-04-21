@@ -1,33 +1,33 @@
 {
-  "editor.rulers": [
-    88
-  ],
-  "editor.minimap.enabled": false,
-  "python.testing.pytestEnabled": true,
-  "python.testing.unittestEnabled": false,
-  "python.testing.pytestArgs": [
-    "./tests"
-  ],
-  "terminal.integrated.scrollback": 100000,
-  "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.shellIntegration.enabled": true,
-  "terminal.integrated.profiles.linux": {
-    "bash": {
-      "path": "bash",
-      "args": [
-        "-l"
-      ]
-    }
-  },
-  "editor.detectIndentation": true,
-  "python.languageServer": "Pylance",
-  "python.defaultInterpreterPath": ".venv/bin/python",
-  "python.terminal.activateEnvironment": true,
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  }
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.black-formatter",
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll": "always"
+		}
+	},
+	"editor.detectIndentation": true,
+	"editor.minimap.enabled": false,
+	"editor.rulers": [
+		88
+	],
+	"python.defaultInterpreterPath": ".venv/bin/python",
+	"python.languageServer": "Pylance",
+	"python.terminal.activateEnvironment": true,
+	"python.testing.pytestArgs": [
+		"./tests"
+	],
+	"python.testing.pytestEnabled": true,
+	"python.testing.unittestEnabled": false,
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"terminal.integrated.profiles.linux": {
+		"bash": {
+			"path": "bash",
+			"args": [
+				"-l"
+			]
+		}
+	},
+	"terminal.integrated.scrollback": 100000,
+	"terminal.integrated.shellIntegration.enabled": true
 }
