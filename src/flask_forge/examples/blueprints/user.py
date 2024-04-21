@@ -25,20 +25,18 @@ class User(MethodView):
     # Retrieve user information
     @blueprint.response(200)
     def get(self, uuid: str):
-        user = users.get(uuid, None)
-        if not user:
+        if user := users.get(uuid):
+            return user.__dict__
+        else:
             return make_response(jsonify(error="user not found"), 404)
-
-        return user.__dict__
 
     # Delete an existing user
     @blueprint.response(204)
     def delete(self, uuid: str):
-        user = users.get(uuid, None)
-        if not user:
+        if users.get(uuid):
+            del users[uuid]
+        else:
             return make_response(jsonify(error="user not found"), 404)
-
-        del users[uuid]
 
     def __init__(self, name: str | None, email: str | None):
         if not name:
@@ -96,8 +94,8 @@ class Users(MethodView):
     @blueprint.response(201)
     @blueprint.arguments(UserSchema)
     def post(self, data: dict[str, Any]):
-        name = data.get("name", None)
-        email = data.get("email", None)
+        name = data.get("name")
+        email = data.get("email")
 
         try:
             user = User(name, email)

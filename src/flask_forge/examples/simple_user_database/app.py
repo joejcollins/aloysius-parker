@@ -22,10 +22,10 @@ def home():
 
 @APP.get("/users/<string:uuid>")
 def get_user(uuid: str):
-    user = users.get(uuid, None)
-    if not user:
+    if user := users.get(uuid, None):
+        return user.__dict__  # Automatically turns into content-type: application/json
+    else:
         return make_response(jsonify(error="user not found"), 404)
-    return user.__dict__  # Automatically turns into JSON content-type: application/json
 
 
 @APP.delete("/users/<string:uuid>")
