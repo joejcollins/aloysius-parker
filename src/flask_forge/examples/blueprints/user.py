@@ -3,7 +3,7 @@ from json import loads
 from typing import Any
 from uuid import uuid4
 
-from flask import make_response, jsonify
+from flask import jsonify, make_response
 from flask.views import MethodView
 from flask_smorest import Blueprint
 from marshmallow import Schema, fields
@@ -41,17 +41,20 @@ class User(MethodView):
         del users[uuid]
 
     def __init__(self, name: str | None, email: str | None):
-
         if not name:
             raise ValueError("Name cannot be empty")
 
         # Username checking logic
         if len(name) < self.MIN_USERNAME_LENGTH or len(name) > self.MAX_USERNAME_LENGTH:
             raise ValueError(
-                f"Username must be between {self.MIN_USERNAME_LENGTH} and {self.MAX_USERNAME_LENGTH} characters long")
+                f"Username must be between {self.MIN_USERNAME_LENGTH} and "
+                f"{self.MAX_USERNAME_LENGTH} characters long"
+            )
 
         if len(email) > self.MAX_EMAIL_LENGTH:
-            raise ValueError(f"Email must be less than {self.MAX_EMAIL_LENGTH} characters long")
+            raise ValueError(
+                f"Email must be less than {self.MAX_EMAIL_LENGTH} characters long"
+            )
 
         # Email checking logic.
         # parseaddr() return a tuple of (name, email), we only need the email part
@@ -66,7 +69,8 @@ class User(MethodView):
         if domain not in self.ALLOWED_EMAIL_PROVIDER_DOMAINS:
             raise ValueError(
                 f"Email provider {domain} is not allowed. "
-                f"Only {', '.join(self.ALLOWED_EMAIL_PROVIDER_DOMAINS)} are allowed.")
+                f"Only {', '.join(self.ALLOWED_EMAIL_PROVIDER_DOMAINS)} are allowed."
+            )
 
         self.uuid: str = uuid4().hex
         self.name: str = name
@@ -88,12 +92,10 @@ class UserSchema(Schema):
 
 @blueprint.route("/users")
 class Users(MethodView):
-
     # Register a new user
     @blueprint.response(201)
     @blueprint.arguments(UserSchema)
     def post(self, data: dict[str, Any]):
-
         name = data.get("name", None)
         email = data.get("email", None)
 

@@ -1,11 +1,12 @@
 from datetime import datetime
 
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, jsonify, make_response, request
 
 from .db import users
 from .user import User
 
-# This is an example API server that features simple user registration, user retrieval, and user deletion
+# This is an example API server that features simple user registration, user retrieval,
+# and user deletion
 START_TIME: datetime = datetime.now()
 APP: Flask = Flask(__name__)
 
@@ -14,7 +15,9 @@ APP: Flask = Flask(__name__)
 @APP.route("/")
 def home():
     endpoints = [rule.rule for rule in APP.url_map.iter_rules()]
-    return jsonify(name=__name__, endpoints=endpoints, uptime=str(datetime.now() - START_TIME))
+    return jsonify(
+        name=__name__, endpoints=endpoints, uptime=str(datetime.now() - START_TIME)
+    )
 
 
 @APP.get("/users/<string:uuid>")
@@ -22,8 +25,7 @@ def get_user(uuid: str):
     user = users.get(uuid, None)
     if not user:
         return make_response(jsonify(error="user not found"), 404)
-
-    return user.__dict__  # This automatically turns into JSON with content-type: application/json
+    return user.__dict__  # Automatically turns into JSON content-type: application/json
 
 
 @APP.delete("/users/<string:uuid>")
@@ -39,7 +41,8 @@ def unregister(uuid: str):
 # Registration endpoint that only accepts POST requests
 @APP.post("/users/register")
 def register():
-    # If the request content type is not application/json, this will raise a 415 Unsupported Media Type error
+    # If the request content type is not application/json,
+    # this will raise a 415 Unsupported Media Type error
     data = request.json
 
     # Get the name and email from the JSON data

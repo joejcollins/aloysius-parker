@@ -1,12 +1,13 @@
 from datetime import datetime
 
-from flask import Flask, jsonify, Response
+from flask import Flask, Response, jsonify
 from flask_smorest import Api
 
 from .errors import ErrorSchema
 from .user import blueprint as UserBlueprint
 
-# This is an example API server that features simple user registration, user retrieval, and user deletion
+# This is an example API server that features simple user registration, user retrieval,
+# and user deletion
 START_TIME: datetime = datetime.now()
 APP: Flask = Flask(__name__)
 
@@ -29,7 +30,9 @@ API.ERROR_SCHEMA = ErrorSchema
 @APP.route("/")
 def home() -> Response:
     endpoints = [rule.rule for rule in APP.url_map.iter_rules()]
-    return jsonify(name=__name__, endpoints=endpoints, uptime=str(datetime.now() - START_TIME))
+    return jsonify(
+        name=__name__, endpoints=endpoints, uptime=str(datetime.now() - START_TIME)
+    )
 
 
 API.register_blueprint(UserBlueprint)

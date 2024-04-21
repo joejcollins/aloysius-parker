@@ -9,6 +9,7 @@
         "eamodio",
         "Errno",
         "isort",
+        "jsonify",
         "mypy",
         "sourcery",
         "venv",
