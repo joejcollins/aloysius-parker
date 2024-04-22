@@ -33,6 +33,7 @@ dependencies = [
     "ruff",
     "setuptools",
     "sourcery",
+    "flask_sqlalchemy",
 ]
 
 [tool.setuptools.packages.find]

@@ -31,12 +31,17 @@ debugpy==1.8.1
 flask==3.0.3
     # via
     #   flask-smorest
+    #   flask-sqlalchemy
     #   flask_forge (pyproject.toml)
     #   pytest-flask
 flask-smorest==0.44.0
     # via flask_forge (pyproject.toml)
+flask-sqlalchemy==3.1.1
+    # via flask_forge (pyproject.toml)
 ghp-import==2.1.0
     # via mkdocs
+greenlet==3.0.3
+    # via sqlalchemy
 gunicorn==22.0.0
     # via flask_forge (pyproject.toml)
 idna==3.7
@@ -150,8 +155,12 @@ six==1.16.0
     # via python-dateutil
 sourcery==1.16.0
     # via flask_forge (pyproject.toml)
+sqlalchemy==2.0.29
+    # via flask-sqlalchemy
 typing-extensions==4.11.0
-    # via mypy
+    # via
+    #   mypy
+    #   sqlalchemy
 urllib3==2.2.1
     # via
     #   requests
