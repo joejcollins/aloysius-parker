@@ -16,8 +16,9 @@ compile:  # Compile the requirements files using pip-tools.
 	echo "-e ." >> requirements.txt
 
 .PHONY: docs  # because there is a directory called docs.
-docs:  # Build the documentation.
-	export TZ=UTC # to avoid time zone issues in Sphinx.
+docs:  # Build the documentation from the comments and documents.
+	export TZ=UTC
+	sphinx-apidoc -o docs/flask_forge src/flask_forge
 	sphinx-autobuild docs docs/_build/html
 
 flask:  # Run the Flask API server.
