@@ -23,7 +23,5 @@ jobs:
         run: |
           make venv
           make report
-          printenv
           make lint
-
           make test
