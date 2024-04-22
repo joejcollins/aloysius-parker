@@ -16,9 +16,9 @@ compile:  # Compile the requirements files using pip-tools.
 	echo "-e ." >> requirements.txt
 
 .PHONY: docs  # because there is a directory called docs.
-docs:  # Build the mkdocs documentation.
-	.venv/bin/python -m mkdocs build --clean
-	.venv/bin/python -m mkdocs serve
+docs:  # Build the documentation.
+	export TZ=UTC # to avoid time zone issues in Sphinx.
+	sphinx-autobuild docs docs/_build/html
 
 flask:  # Run the Flask API server.
 	.venv/bin/python -m flask --app 'src/flask_forge/examples/blueprints/app.py' run
