@@ -56,7 +56,8 @@ profile = "black"
 line_length = 88
 
 [tool.ruff]
-lint.select = ["F", "E", "W", "C90", "I"]
+lint.select = ["F", "E", "W", "C90", "I", "PL", "D"]
+lint.ignore = ["D203", "D213"]
 lint.fixable = ["ALL"]
 target-version = "py311"
 exclude = [
