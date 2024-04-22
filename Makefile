@@ -33,7 +33,7 @@ help: # Show help for each of the makefile recipes.
 lint:  # Lint the code with ruff, yamllint and ansible-lint.
 	.venv/bin/python -m ruff check ./src
 	.venv/bin/sourcery login --token $$SOURCERY_TOKEN
-	.venv/bin/sourcery review ./src ./tests --check
+	.venv/bin/sourcery review ./src ./tests --check --no-summary
 
 mypy:  # Type check the code with mypy.
 	.venv/bin/python -m mypy ./src ./tests
