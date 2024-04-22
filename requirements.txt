@@ -16,6 +16,8 @@ build==1.2.1
     # via pip-tools
 certifi==2024.2.2
     # via requests
+cfgv==3.4.0
+    # via pre-commit
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
@@ -28,6 +30,10 @@ colorama==0.4.6
     # via mkdocs-material
 debugpy==1.8.1
     # via flask_forge (pyproject.toml)
+distlib==0.3.8
+    # via virtualenv
+filelock==3.13.4
+    # via virtualenv
 flask==3.0.3
     # via
     #   flask-smorest
@@ -39,6 +45,8 @@ ghp-import==2.1.0
     # via mkdocs
 gunicorn==22.0.0
     # via flask_forge (pyproject.toml)
+identify==2.5.36
+    # via pre-commit
 idna==3.7
     # via requests
 iniconfig==2.0.0
@@ -83,6 +91,8 @@ mypy-extensions==1.0.0
     # via
     #   black
     #   mypy
+nodeenv==1.8.0
+    # via pre-commit
 packaging==24.0
     # via
     #   apispec
@@ -106,8 +116,11 @@ platformdirs==4.2.0
     #   black
     #   mkdocs
     #   mkdocs-get-deps
+    #   virtualenv
 pluggy==1.5.0
     # via pytest
+pre-commit==3.7.0
+    # via flask_forge (pyproject.toml)
 pygments==2.17.2
     # via mkdocs-material
 pymdown-extensions==10.8
@@ -131,6 +144,7 @@ pyyaml==6.0.1
     # via
     #   mkdocs
     #   mkdocs-get-deps
+    #   pre-commit
     #   pymdown-extensions
     #   pyyaml-env-tag
     #   responses
@@ -156,6 +170,8 @@ urllib3==2.2.1
     # via
     #   requests
     #   responses
+virtualenv==20.25.3
+    # via pre-commit
 watchdog==4.0.0
     # via mkdocs
 webargs==8.4.0

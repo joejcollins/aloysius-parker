@@ -9,3 +9,9 @@ def test_dummy() -> None:
     result = dummy.dummy()
     # ASSERT
     assert result == "dummy"
+
+
+def test_dummy2() -> None:
+    """Confirm return."""
+    # ASSERT
+    assert "dummy" == "dummy2"
