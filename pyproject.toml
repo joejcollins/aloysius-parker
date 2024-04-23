@@ -22,8 +22,6 @@ dependencies = [
     "flask",
     "flask_smorest",
     "gunicorn",
-    "mkdocs",
-    "mkdocs-material",  # theme for the documentation.
     "mypy", 
     "pip-tools",
     "pytest-flask",
@@ -33,6 +31,10 @@ dependencies = [
     "ruff",
     "setuptools",
     "sourcery",
+    "sphinx",
+    "sphinx-autobuild",
+    "sphinx-rtd-theme",
+    "sphinxcontrib-mermaid",
     "flask_sqlalchemy",
 ]
 
@@ -59,7 +61,8 @@ profile = "black"
 line_length = 88
 
 [tool.ruff]
-lint.select = ["F", "E", "W", "C90", "I"]
+lint.select = ["F", "E", "W", "C90", "I", "PL", "D"]
+lint.ignore = ["D203", "D213"]
 lint.fixable = ["ALL"]
 target-version = "py311"
 exclude = [

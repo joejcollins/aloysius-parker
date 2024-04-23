@@ -3,7 +3,7 @@ from json import loads
 from typing import Any
 from uuid import uuid4
 
-from flask import make_response, jsonify
+from flask import jsonify, make_response
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
@@ -36,11 +36,10 @@ class User(MethodView):
     # Delete an existing user
     @blueprint.response(204)
     def delete(self, uuid: str):
-        user = users.get(uuid, None)
-        if not user:
+        if users.get(uuid, None):
+            del users[uuid]
+        else:
             return make_response(jsonify(error="user not found"), 404)
-
-        del users[uuid]
 
     def __init__(self, name: str | None, email: str | None):
 
@@ -50,10 +49,14 @@ class User(MethodView):
         # Username checking logic
         if len(name) < self.MIN_USERNAME_LENGTH or len(name) > self.MAX_USERNAME_LENGTH:
             raise ValueError(
-                f"Username must be between {self.MIN_USERNAME_LENGTH} and {self.MAX_USERNAME_LENGTH} characters long")
+                f"Username must be between {self.MIN_USERNAME_LENGTH} \
+                    and {self.MAX_USERNAME_LENGTH} characters long"
+            )
 
         if len(email) > self.MAX_EMAIL_LENGTH:
-            raise ValueError(f"Email must be less than {self.MAX_EMAIL_LENGTH} characters long")
+            raise ValueError(
+                f"Email must be less than {self.MAX_EMAIL_LENGTH} characters long"
+            )
 
         # Email checking logic.
         # parseaddr() return a tuple of (name, email), we only need the email part
@@ -68,7 +71,8 @@ class User(MethodView):
         if domain not in self.ALLOWED_EMAIL_PROVIDER_DOMAINS:
             raise ValueError(
                 f"Email provider {domain} is not allowed. "
-                f"Only {', '.join(self.ALLOWED_EMAIL_PROVIDER_DOMAINS)} are allowed.")
+                f"Only {', '.join(self.ALLOWED_EMAIL_PROVIDER_DOMAINS)} are allowed."
+            )
 
         self.uuid: str = uuid4().hex
         self.name: str = name
@@ -91,8 +95,8 @@ class Users(MethodView):
     @blueprint.arguments(UserSchema)
     def post(self, data: dict[str, Any]):
 
-        name = data.get("name", None)
-        email = data.get("email", None)
+        name = data.get("name")
+        email = data.get("email")
 
         try:
             user = User(name, email)

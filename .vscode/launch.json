@@ -1,4 +1,7 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -9,21 +12,22 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Flask API",
+            "name": "Python Debugger: Flask SQLAlchemy Example",
             "type": "debugpy",
             "request": "launch",
-            "module": "gunicorn",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "src/flask_forge/examples/sqlalchemy/app.py",
+                "FLASK_DEBUG": "1"
+            },
             "args": [
-                "flask_api_v1_v2.main:FLASK_API",
-                "--config",
-                "./flask_api_v1_v2/gunicorn_conf.py",
-                "--workers",
-                "1",
-                "--timeout",
-                "3600"
+                "run",
+                "--no-debugger",
+                "--no-reload"
             ],
             "jinja": true,
-            "justMyCode": false
+            "justMyCode": false,
+            "autoStartBrowser": false
         },
         {
             "name": "Remote Attach",

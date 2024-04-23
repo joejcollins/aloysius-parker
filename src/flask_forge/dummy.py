@@ -2,5 +2,5 @@
 
 
 def dummy() -> str:
-    """Dummy function."""
+    """Return a dummy string."""
     return "dummy"
