@@ -6,7 +6,7 @@ from flask_forge.config import monitoring
 
 
 def create_app():
-    """Create the Flask app."""
+    """Create the Flask app and configure it with monitoring."""
     new_app = Flask(__name__)
     monitoring.configure_monitoring(new_app)
     return new_app
