@@ -36,6 +36,9 @@ dependencies = [
     "flask_sqlalchemy",
 ]
 
+[project.scripts]
+flask-cli = "flask_forge.cli.main:runserver"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 namespaces = false
