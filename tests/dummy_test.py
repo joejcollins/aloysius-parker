@@ -1,11 +1,12 @@
 """Test the dummy."""
 
-from flask_forge import dummy
+from flask import app
+from flask_forge import main
 
 
 def test_dummy() -> None:
     """Confirm return."""
     # ACT
-    result = dummy.dummy()
+    the_app = main.create_app()
     # ASSERT
-    assert result == "dummy"
+    assert isinstance(the_app, app.Flask)

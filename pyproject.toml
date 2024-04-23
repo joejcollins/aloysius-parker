@@ -24,6 +24,7 @@ dependencies = [
     "gunicorn",
     "mypy", 
     "pip-tools",
+    "prometheus-flask-exporter",
     "pytest-flask",
     "pytest-mock",
     "pytest",
@@ -40,6 +41,7 @@ dependencies = [
 
 [project.scripts]
 flask-cli = "flask_forge.cli.main:runserver"
+run = "flask_forge.main:run"
 
 [tool.setuptools.packages.find]
 where = ["src"]
