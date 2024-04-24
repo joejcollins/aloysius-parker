@@ -1,9 +1,9 @@
 from datetime import datetime
 
 from flask import Flask, jsonify, make_response, request
-from user import User
 
 from flask_forge.examples.simple_user_database import db
+from user import User
 
 # This is an example API server that features simple user registration, user retrieval,
 # and user deletion

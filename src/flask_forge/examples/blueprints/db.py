@@ -4,4 +4,3 @@ from typing import Any
 database: dict[str, Any] = {
     "users": {}
 }
-

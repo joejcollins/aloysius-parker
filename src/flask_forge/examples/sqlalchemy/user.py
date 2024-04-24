@@ -2,14 +2,12 @@ from email.utils import parseaddr
 from json import loads
 from uuid import uuid4
 
-from flask.views import MethodView
-
 from flask_forge.examples.sqlalchemy.models.user import UserModel
 
 users = UserModel.query
 
 
-class User(MethodView):
+class User:
     MIN_USERNAME_LENGTH: int = 2
     MAX_USERNAME_LENGTH: int = 16
     MAX_EMAIL_LENGTH: int = 64

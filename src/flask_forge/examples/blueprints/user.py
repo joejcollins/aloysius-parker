@@ -2,7 +2,6 @@ from email.utils import parseaddr
 from json import loads
 from uuid import uuid4
 
-from flask.views import MethodView
 from marshmallow import Schema, fields
 
 from flask_forge.examples.blueprints.db import database
@@ -10,7 +9,7 @@ from flask_forge.examples.blueprints.db import database
 users: dict[str] = database["users"]
 
 
-class User(MethodView):
+class User:
     MIN_USERNAME_LENGTH: int = 2
     MAX_USERNAME_LENGTH: int = 16
     MAX_EMAIL_LENGTH: int = 64
