@@ -3,15 +3,11 @@ from datetime import datetime
 from flask import Flask, Response, jsonify
 from flask_smorest import Api
 
-from flask_forge.examples.sqlalchemy.db import database
-from .errors import ErrorSchema
-from .user import blueprint as UserBlueprint
-
-# This is an example API server that features simple user registration, user retrieval,
-# and user deletion
+from flask_forge.examples.sqlalchemy.errors import ErrorSchema
+from flask_forge.examples.sqlalchemy.views import blueprint as user_blueprint
 
 
-def create_app() -> Flask:
+def create_app():
     config: dict[str, str | bool] = {
         "PROPAGATE_EXCEPTIONS": True,
         "API_TITLE": "User Management API",
@@ -20,22 +16,19 @@ def create_app() -> Flask:
         "OPENAPI_URL_PREFIX": "/",
         "OPENAPI_SWAGGER_UI_PATH": "/swagger-ui",
         "OPENAPI_SWAGGER_UI_URL": "https://cdn.jsdelivr.net/npm/swagger-ui-dist/",
-        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",  # sqlite:///data.db
     }
 
-    app: Flask = Flask(__name__)
-    app.config.update(config)
-    api: Api = Api(app)
-    api.ERROR_SCHEMA = ErrorSchema
-
-    api.register_blueprint(UserBlueprint)
-    database.create_all()
-
-    return app
+    new_app = Flask(__name__)
+    new_app.config.update(config)
+    return new_app
 
 
 START_TIME: datetime = datetime.now()
 APP: Flask = create_app()
+
+API: Api = Api(APP)
+API.ERROR_SCHEMA = ErrorSchema
+API.register_blueprint(user_blueprint)
 
 
 # Defines what the path "/" will do
@@ -45,3 +38,7 @@ def home() -> Response:
     return jsonify(
         name=__name__, endpoints=endpoints, uptime=str(datetime.now() - START_TIME)
     )
+
+
+if __name__ == "__main__":
+    APP.run()

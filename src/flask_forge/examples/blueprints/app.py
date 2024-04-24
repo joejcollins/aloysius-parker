@@ -4,26 +4,31 @@ from flask import Flask, Response, jsonify
 from flask_smorest import Api
 
 from flask_forge.examples.blueprints.errors import ErrorSchema
-from flask_forge.examples.blueprints.user import blueprint as user_blueprint
+from flask_forge.examples.blueprints.views import blueprint as user_blueprint
 
-# This is an example API server that features simple user registration, user retrieval,
-# and user deletion
+
+def create_app():
+    config: dict[str, str | bool] = {
+        "PROPAGATE_EXCEPTIONS": True,
+        "API_TITLE": "User Management API",
+        "API_VERSION": "v1",
+        "OPENAPI_VERSION": "3.0.3",
+        "OPENAPI_URL_PREFIX": "/",
+        "OPENAPI_SWAGGER_UI_PATH": "/swagger-ui",
+        "OPENAPI_SWAGGER_UI_URL": "https://cdn.jsdelivr.net/npm/swagger-ui-dist/",
+    }
+
+    new_app = Flask(__name__)
+    new_app.config.update(config)
+    return new_app
+
+
 START_TIME: datetime = datetime.now()
-APP: Flask = Flask(__name__)
+APP: Flask = create_app()
 
-CONFIG: dict[str, str | bool] = {
-    "PROPAGATE_EXCEPTIONS": True,
-    "API_TITLE": "User Management API",
-    "API_VERSION": "v1",
-    "OPENAPI_VERSION": "3.0.3",
-    "OPENAPI_URL_PREFIX": "/",
-    "OPENAPI_SWAGGER_UI_PATH": "/swagger-ui",
-    "OPENAPI_SWAGGER_UI_URL": "https://cdn.jsdelivr.net/npm/swagger-ui-dist/",
-}
-
-APP.config.update(CONFIG)
 API: Api = Api(APP)
 API.ERROR_SCHEMA = ErrorSchema
+API.register_blueprint(user_blueprint)
 
 
 # Defines what the path "/" will do
@@ -35,4 +40,5 @@ def home() -> Response:
     )
 
 
-API.register_blueprint(user_blueprint)
+if __name__ == "__main__":
+    APP.run()

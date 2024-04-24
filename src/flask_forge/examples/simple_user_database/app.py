@@ -61,3 +61,7 @@ def register():
 
     # Return the user object as a JSON string
     return user.__dict__
+
+
+if __name__ == "__main__":
+    APP.run()
