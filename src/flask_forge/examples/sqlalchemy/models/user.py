@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String
 
-from ..db import database
+from flask_forge.examples.sqlalchemy.db import database
 
 
 class UserModel(database.Model):
