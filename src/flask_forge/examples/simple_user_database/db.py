@@ -1,10 +1,10 @@
-from typing import Any, Dict
+from typing import Any
 
-from .user import User
+from flask_forge.examples.simple_user_database.user import User
 
 # Simple in-memory database
 database: dict[str, Any] = {
     "users": {}
 }
 
-users: Dict[str, User] = database["users"]
+users: dict[str, User] = database["users"]

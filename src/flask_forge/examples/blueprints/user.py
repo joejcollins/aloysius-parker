@@ -8,7 +8,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint
 from marshmallow import Schema, fields
 
-from .db import database
+from flask_forge.examples.blueprints.db import database
 
 users: dict[str] = database["users"]
 

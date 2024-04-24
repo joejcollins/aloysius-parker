@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Flask, Response, jsonify
 from flask_smorest import Api
 
-from .db import database
+from flask_forge.examples.sqlalchemy.db import database
 from .errors import ErrorSchema
 from .user import blueprint as UserBlueprint
 
@@ -29,10 +29,7 @@ def create_app() -> Flask:
     api.ERROR_SCHEMA = ErrorSchema
 
     api.register_blueprint(UserBlueprint)
-
-    @app.before_first_request
-    def create_tables():
-        database.create_all()
+    database.create_all()
 
     return app
 

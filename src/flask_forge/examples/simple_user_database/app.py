@@ -2,8 +2,8 @@ from datetime import datetime
 
 from flask import Flask, jsonify, make_response, request
 
-from .db import users
-from .user import User
+import flask_forge.examples.simple_user_database.db as db
+from user import User
 
 # This is an example API server that features simple user registration, user retrieval,
 # and user deletion
@@ -22,7 +22,7 @@ def home():
 
 @APP.get("/users/<string:uuid>")
 def get_user(uuid: str):
-    if user := users.get(uuid, None):
+    if user := db.users.get(uuid, None):
         return user.__dict__  # Automatically turns into content-type: application/json
     else:
         return make_response(jsonify(error="user not found"), 404)
@@ -30,11 +30,11 @@ def get_user(uuid: str):
 
 @APP.delete("/users/<string:uuid>")
 def unregister(uuid: str):
-    user = users.get(uuid, None)
+    user = db.users.get(uuid, None)
     if not user:
         return make_response(jsonify(error="user not found"), 404)
 
-    del users[uuid]
+    del db.users[uuid]
     return "", 204  # Remember that this is a tuple
 
 
@@ -57,7 +57,7 @@ def register():
         return make_response(jsonify(error=str(e)), 400)
 
     # Add the user to the database
-    users[user.uuid] = user
+    db.users[user.uuid] = user
 
     # Return the user object as a JSON string
     return user.__dict__

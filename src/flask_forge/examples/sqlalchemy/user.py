@@ -7,8 +7,8 @@ from flask import jsonify, make_response
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
-from .models import UserModel
-from .schemas import UserSchema
+from flask_forge.examples.sqlalchemy.models.user import UserModel
+from flask_forge.examples.sqlalchemy.schemas import UserSchema
 
 users = UserModel.query
 

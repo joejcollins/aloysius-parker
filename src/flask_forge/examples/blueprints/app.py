@@ -3,8 +3,8 @@ from datetime import datetime
 from flask import Flask, Response, jsonify
 from flask_smorest import Api
 
-from .errors import ErrorSchema
-from .user import blueprint as UserBlueprint
+from flask_forge.examples.blueprints.errors import ErrorSchema
+from flask_forge.examples.blueprints.user import blueprint as user_blueprint
 
 # This is an example API server that features simple user registration, user retrieval,
 # and user deletion
@@ -35,4 +35,4 @@ def home() -> Response:
     )
 
 
-API.register_blueprint(UserBlueprint)
+API.register_blueprint(user_blueprint)
