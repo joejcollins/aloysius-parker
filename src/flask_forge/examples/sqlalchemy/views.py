@@ -1,10 +1,10 @@
 from typing import Any
 
-from flask import make_response, jsonify
+from flask import jsonify, make_response
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
-from flask_forge.examples.blueprints.user import users, UserSchema, User
+from flask_forge.examples.blueprints.user import User, UserSchema, users
 
 blueprint = Blueprint("users", "users", description="User management API")
 
@@ -33,7 +33,6 @@ class UsersEndpoint(MethodView):
 @blueprint.route("/users/<string:uuid>")
 class UserEndpoint(MethodView):
 
-    # Retrieve user information
     @blueprint.response(200)
     def get(self, uuid: str):
         if user := users.get(uuid):
@@ -41,7 +40,6 @@ class UserEndpoint(MethodView):
         else:
             return make_response(jsonify(error="user not found"), 404)
 
-    # Delete an existing user
     @blueprint.response(204)
     def delete(self, uuid: str):
         if users.get(uuid):

@@ -1,10 +1,10 @@
 from typing import Any
 
-from flask import make_response, jsonify
+from flask import jsonify, make_response
 from flask.views import MethodView
 from flask_smorest import Blueprint
 
-from flask_forge.examples.blueprints.user import users, UserSchema, User
+from flask_forge.examples.blueprints.user import User, UserSchema, users
 
 blueprint = Blueprint("users", "users", description="User management API")
 

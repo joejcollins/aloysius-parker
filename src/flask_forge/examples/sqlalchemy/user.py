@@ -14,6 +14,7 @@ class User(MethodView):
     MAX_USERNAME_LENGTH: int = 16
     MAX_EMAIL_LENGTH: int = 64
     ALLOWED_EMAIL_PROVIDER_DOMAINS: set[str] = {"gmail.com", "mail.ru", "outlook.com"}
+    EMAIL_SPLIT_EXPECTED_LENGTH: int = 2
 
     def __init__(self, name: str | None, email: str | None):
         if not name:
@@ -36,7 +37,8 @@ class User(MethodView):
         email: str = parseaddr(email)[1]
         email_split: list[str] = email.split("@")
 
-        if len(email_split) != 2 or not email_split[0] or not email_split[1]:
+        if (len(email_split) != self.EMAIL_SPLIT_EXPECTED_LENGTH
+                or not email_split[0] or not email_split[1]):
             raise ValueError("Invalid email address")
 
         domain: str = email_split[1]
