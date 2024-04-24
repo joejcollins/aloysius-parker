@@ -1,15 +1,26 @@
+"""User class represents a user in the database."""
 from email.utils import parseaddr
 from json import loads
 from uuid import uuid4
 
-from marshmallow import Schema, fields
+from sqlalchemy import Column, String
 
-from flask_forge.examples.blueprints.db import database
-
-users: dict[str] = database["users"]
+from flask_forge.examples.user_database.db import database
 
 
-class User:
+class User(database.Model):
+    """User class represents a user in the database.
+
+    The class holds information about the user's name and email,
+    and contains validation logic for those fields.
+    """
+
+    __tablename__ = "users"
+
+    uuid: Column[String] = Column(String, primary_key=True)
+    name: Column[String] = Column(String, nullable=False)
+    email: Column[String] = Column(String, nullable=False)
+
     MIN_USERNAME_LENGTH: int = 2
     MAX_USERNAME_LENGTH: int = 16
     MAX_EMAIL_LENGTH: int = 64
@@ -17,11 +28,13 @@ class User:
     EMAIL_SPLIT_EXPECTED_LENGTH: int = 2
 
     def __init__(self, name: str | None, email: str | None):
-        if not name:
-            raise ValueError("Name cannot be empty")
-
+        """Create a new User object with a provided name and email."""
         # Username checking logic
-        if len(name) < self.MIN_USERNAME_LENGTH or len(name) > self.MAX_USERNAME_LENGTH:
+        if (
+            not name or
+            len(name) < self.MIN_USERNAME_LENGTH
+            or len(name) > self.MAX_USERNAME_LENGTH
+        ):
             raise ValueError(
                 f"Username must be between {self.MIN_USERNAME_LENGTH} and "
                 f"{self.MAX_USERNAME_LENGTH} characters long"
@@ -37,7 +50,8 @@ class User:
         email: str = parseaddr(email)[1]
         email_split: list[str] = email.split("@")
 
-        if len(email_split) != self.EMAIL_SPLIT_EXPECTED_LENGTH or not email_split[0] or not email_split[1]:
+        if (len(email_split) != self.EMAIL_SPLIT_EXPECTED_LENGTH
+                or not email_split[0] or not email_split[1]):
             raise ValueError("Invalid email address")
 
         domain: str = email_split[1]
@@ -54,13 +68,18 @@ class User:
 
     @classmethod
     def from_json(cls, json_str):
+        """Create a new User object from a JSON string."""
         json_dict = loads(json_str)
         return cls(**json_dict)
 
+    def to_json(self):
+        """Return a JSON representation of the User object."""
+        return {
+            "uuid": self.uuid,
+            "name": self.name,
+            "email": self.email
+        }
+
     def __hash__(self):
+        """Return a hash of the user's UUID."""
         return hash(self.uuid)
-
-
-class UserSchema(Schema):
-    name = fields.String(required=True, description="The name of the user")
-    email = fields.String(required=True, description="The email of the user")

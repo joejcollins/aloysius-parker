@@ -1,9 +1,12 @@
+"""Logic concerning error handling for requests."""
 from enum import Enum
 
 from marshmallow import Schema, fields
 
 
 class ErrorEnum(Enum):
+    """Unique error codes for the application. Unused for now."""
+
     USER_NOT_FOUND = 1001
     USER_ALREADY_EXISTS = 1002
     USER_INVALID_NAME = 1003
@@ -13,5 +16,7 @@ class ErrorEnum(Enum):
 
 
 class ErrorSchema(Schema):
+    """Global error schema for the application."""
+
     code: ErrorEnum = fields.Enum(ErrorEnum, description="Unique error code")
     message: str = fields.String(description="Error message details")
