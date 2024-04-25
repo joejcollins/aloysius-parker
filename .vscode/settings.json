@@ -11,6 +11,32 @@
 	"editor.rulers": [
 		88
 	],
+	"files.exclude": {
+		"**/__pycache__": true,
+		"**/*.pyc": true,
+		"**/.git/objects/**": true,
+		"**/.git/subtree-cache/**": true,
+		"**/.DS_Store": true
+	  },
+	  "files.watcherExclude": {
+		"**/__pycache__": true,
+		"**/*.pyc": true,
+		"**/.git/objects/**": true,
+		"**/.git/subtree-cache/**": true,
+		"**/.pytest-cache/**": true,
+		"**/.ruff-cache/**": true,
+		"**/.venv/**": true,
+		"**/.DS_Store": true,
+		"**/typings": true
+	  },
+	  "search.exclude": {
+		"**/__pycache__": true,
+		"**/*.pyc": true,
+		"**/.git/objects/**": true,
+		"**/.git/subtree-cache/**": true,
+		"**/.venv/**": true,
+		"**/.DS_Store": true
+	  },
 	"python.defaultInterpreterPath": ".venv/bin/python",
 	"python.languageServer": "Pylance",
 	"python.terminal.activateEnvironment": true,
