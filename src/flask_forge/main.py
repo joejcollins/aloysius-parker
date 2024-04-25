@@ -1,4 +1,5 @@
 """Flask application for rapid deployment via Docker."""
+
 from datetime import datetime
 
 from flask import Flask, Response, jsonify
@@ -55,5 +56,7 @@ def home() -> Response:
     )
 
 
-if __name__ == "__main__":
-    APP.run()
+def run():
+    """Run the Flask app."""
+    app = create_app()
+    app.run()
