@@ -36,24 +36,24 @@ def create_app() -> Flask:
     # Configure Prometheus monitoring
     monitoring.configure_monitoring(app)
 
+    # Configure the API
+    api: Api = Api(app)
+    api.register_blueprint(USER_BLUEPRINT)
+    api.ERROR_SCHEMA = ErrorSchema
+
+    # Define the home route
+    @app.route("/")
+    def home() -> Response:
+        """Return a JSON response with the name of the app, endpoints, and the uptime."""
+        endpoints = [rule.rule for rule in app.url_map.iter_rules()]
+        return jsonify(
+            name=__name__, endpoints=endpoints, uptime=str(datetime.now() - START_TIME)
+        )
+
     return app
 
 
 START_TIME: datetime = datetime.now()
-APP: Flask = create_app()
-
-API: Api = Api(APP)
-API.register_blueprint(USER_BLUEPRINT)
-API.ERROR_SCHEMA = ErrorSchema
-
-
-@APP.route("/")
-def home() -> Response:
-    """Return a JSON response with the name of the app, endpoints, and the uptime."""
-    endpoints = [rule.rule for rule in APP.url_map.iter_rules()]
-    return jsonify(
-        name=__name__, endpoints=endpoints, uptime=str(datetime.now() - START_TIME)
-    )
 
 
 def run():
