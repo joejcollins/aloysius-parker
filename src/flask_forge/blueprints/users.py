@@ -2,17 +2,21 @@
 
 from typing import Any
 
+import flask_smorest
 from flask import jsonify, make_response
 from flask.views import MethodView
 from sqlalchemy.exc import SQLAlchemyError
 
-from flask_forge.blueprint.blueprints import USER_BLUEPRINT
 from flask_forge.database.db import database
 from flask_forge.database.user import User
 from flask_forge.model.user import UserSchema
 
+SMOREST_USERS_BLUEPRINT = flask_smorest.Blueprint(
+    "users", __name__, description="Management of the users."
+)
 
-@USER_BLUEPRINT.route("/users")
+
+@SMOREST_USERS_BLUEPRINT.route("/users")
 class UsersEndpoint(MethodView):
     """Define the endpoint for /users.
 
@@ -20,7 +24,7 @@ class UsersEndpoint(MethodView):
     It's separate from UserEndpoint as this endpoint does not accept a UUID.
     """
 
-    @USER_BLUEPRINT.response(200)
+    @SMOREST_USERS_BLUEPRINT.response(200)
     def get(self):
         """Retrieve all users."""
         if users := [user.to_json() for user in User.query.all()]:
@@ -28,8 +32,8 @@ class UsersEndpoint(MethodView):
 
         return "", 204
 
-    @USER_BLUEPRINT.response(201)
-    @USER_BLUEPRINT.arguments(UserSchema)
+    @SMOREST_USERS_BLUEPRINT.response(201)
+    @SMOREST_USERS_BLUEPRINT.arguments(UserSchema)
     def post(self, data: dict[str, Any]):
         """Create a new user via a POST request."""
         name = data.get("name")
@@ -40,7 +44,9 @@ class UsersEndpoint(MethodView):
                 user = User(name, email)
                 database.session.add(user)
         except ValueError as e:
-            return make_response(jsonify(error=str(e)), 400)  # TODO: turn into jsonify instead of make_response()
+            return make_response(
+                jsonify(error=str(e)), 400
+            )  # TODO: turn into jsonify instead of make_response()
         except SQLAlchemyError as e:
             return make_response(jsonify(error=f"database error: {e}"), 500)
         except Exception as e:
