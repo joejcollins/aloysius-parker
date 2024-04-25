@@ -1,1 +1,33 @@
 name: Build Docker image and push to Dockerhub
+
+# Controls when the action will run. Triggers the workflow on push.
+on: push
+
+# Run building the docker image that runs our Flask App?
+jobs:
+  build-and-push:
+     runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repo.
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: kjc94
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+   - name: Build and Push Docker Image
+      id: docker_build
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./.gitpod.Dockerfile
+        push: true
+        tags: |
+          zengenti/flask-forge:latest
+          z/atlanta-shore:${{ github.sha }}
