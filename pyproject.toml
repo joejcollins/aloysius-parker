@@ -40,7 +40,6 @@ dependencies = [
 ]
 
 [project.scripts]
-flask-cli = "flask_forge.cli.main:runserver"
 run = "flask_forge.main:run"
 
 [tool.setuptools.packages.find]
