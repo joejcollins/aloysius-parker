@@ -1,4 +1,4 @@
-"""Defines the request schema for classes."""
+"""Defines the HTTP request schema for classes so that Swagger has more context."""
 from marshmallow import Schema, fields
 
 

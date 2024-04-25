@@ -4,6 +4,7 @@ from enum import Enum
 from marshmallow import Schema, fields
 
 
+# TODO: Standardise the error handling with flask_smorest
 class ErrorEnum(Enum):
     """Unique error codes for the application. Unused for now."""
 
