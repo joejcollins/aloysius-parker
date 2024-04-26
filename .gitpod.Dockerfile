@@ -21,7 +21,7 @@ RUN apt-get install --assume-yes make build-essential libssl-dev zlib1g-dev \
 
 # Install Python 3.11.8 using pyenv
 RUN apt-get -y install locales
-ENV PYENV_VERSION=3.11.8
+ENV PYENV_VERSION=3.11.6
 RUN /usr/local/pyenv/bin/pyenv install ${PYENV_VERSION}
 RUN pyenv global ${PYENV_VERSION}
 RUN pyenv rehash
@@ -31,8 +31,8 @@ RUN pyenv rehash
 RUN update-alternatives --install /usr/bin/python python ${PYENV_ROOT}/versions/${PYENV_VERSION}/bin/python 1
 
 # Set working directory and copy the project files
-WORKDIR /src/flask_forge
-COPY pyproject.toml requirements.txt /src/flask_forge /app/
+WORKDIR /app
+COPY pyproject.toml requirements.txt Makefile /app/
 
 # Build the virtual environment
 RUN eval "$(pyenv init -)" \
@@ -41,5 +41,5 @@ RUN eval "$(pyenv init -)" \
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
-# Run the project script defined in the pyproject.toml file
-RUN CMD ["run"]
+# Set the entry point to run the project script define in pyproject.toml
+ENTRYPOINT ["run"]

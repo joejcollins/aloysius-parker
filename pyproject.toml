@@ -39,12 +39,11 @@ dependencies = [
     "flask_sqlalchemy",
 ]
 
+[project.urls]
+"repository" = "https://github.com/zengenti/flask-forge"
+
 [project.scripts]
 run = "flask_forge.main:run"
-
-[tool.setuptools.packages.find]
-where = ["src"]
-namespaces = false
 
 [tool.black]
 line-length = 88
