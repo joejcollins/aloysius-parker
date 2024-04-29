@@ -7,13 +7,16 @@ clean:  # Remove all build, test, coverage and Python artifacts.
 	find . -name "*.pyc" -exec rm -f {} \;
 	find . -type f -name "*.py[co]" -delete -or -type d -name "__pycache__" -delete
 
-PYTHON = .venv/bin/python -m piptools compile
+PIPTOOLS_COMPILE = .venv/bin/python -m piptools compile
 
 compile:  # Compile the requirements files using pip-tools.
-	rm -f requirements.*
-	$(PYTHON) --output-file=requirements.txt
+	rm -f requirements.*.txt
+	$(PIPTOOLS_COMPILE) --output-file=requirements.txt
 	echo "# Add the entire project as a package." >> requirements.txt
 	echo "-e ." >> requirements.txt
+	$(PIPTOOLS_COMPILE) --allow-unsafe --extra=dev --output-file=requirements.dev.txt
+	echo "# Add the entire project as a package." >> requirements.dev.txt
+	echo "-e ." >> requirements.dev.txt
 
 .PHONY: docs  # because there is a directory called docs.
 docs:  # Build the documentation from the comments and documents.
@@ -48,6 +51,12 @@ venv:  # Install the requirements for Python.
 	python -m venv .venv
 	.venv/bin/python -m pip install --upgrade pip setuptools
 	.venv/bin/python -m pip install -r requirements.txt
+
+venv-dev:  # Install the development requirements for Python.
+	python -m venv .venv
+	.venv/bin/python -m pip install --upgrade pip setuptools
+	.venv/bin/python -m pip install -r requirements.dev.txt
+	.venv/bin/pre-commit install
 
 test:  # Run the tests.
 	.venv/bin/python -m pytest ./tests
