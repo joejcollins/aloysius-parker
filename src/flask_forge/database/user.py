@@ -31,9 +31,9 @@ class User(database.Model):
         """Create a new User object with a provided name and email."""
         # Username checking logic
         if (
-                not name or
-                len(name) < self.MIN_USERNAME_LENGTH
-                or len(name) > self.MAX_USERNAME_LENGTH
+            not name
+            or len(name) < self.MIN_USERNAME_LENGTH
+            or len(name) > self.MAX_USERNAME_LENGTH
         ):
             raise ValueError(
                 f"Username must be between {self.MIN_USERNAME_LENGTH} and "
@@ -50,8 +50,11 @@ class User(database.Model):
         email: str = parseaddr(email)[1]
         email_split: list[str] = email.split("@")
 
-        if (len(email_split) != self.EMAIL_SPLIT_EXPECTED_LENGTH
-                or not email_split[0] or not email_split[1]):
+        if (
+            len(email_split) != self.EMAIL_SPLIT_EXPECTED_LENGTH
+            or not email_split[0]
+            or not email_split[1]
+        ):
             raise ValueError("Invalid email address")
 
         domain: str = email_split[1]
@@ -74,11 +77,7 @@ class User(database.Model):
 
     def to_json(self):
         """Return a JSON representation of the User object."""
-        return {
-            "uuid": self.uuid,
-            "name": self.name,
-            "email": self.email
-        }
+        return {"uuid": self.uuid, "name": self.name, "email": self.email}
 
     def __hash__(self):
         """Return a hash of the user's UUID."""
