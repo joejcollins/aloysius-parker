@@ -3,7 +3,7 @@
 from typing import Any
 
 import flask_smorest
-from flask import jsonify, make_response
+from flask import jsonify
 from flask.views import MethodView
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -44,12 +44,10 @@ class UsersEndpoint(MethodView):
                 user = User(name, email)
                 database.session.add(user)
         except ValueError as e:
-            return make_response(
-                jsonify(error=str(e)), 400
-            )  # TODO: turn into jsonify instead of make_response()
+            return jsonify(error=str(e)), 400
         except SQLAlchemyError as e:
-            return make_response(jsonify(error=f"database error: {e}"), 500)
+            return jsonify(error=f"database error: {e}"), 500
         except Exception as e:
-            return make_response(jsonify(error=f"internal server error: {e}"), 500)
+            return jsonify(error=f"internal server error: {e}"), 500
 
         return user.to_json()
