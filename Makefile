@@ -22,7 +22,7 @@ docs:  # Build the documentation from the comments and documents.
 	sphinx-autobuild docs docs/_build/html
 
 flask:  # Run the Flask API server.
-	.venv/bin/python -m flask --app 'src/flask_forge/examples/blueprints/app.py' run
+	.venv/bin/python -m flask --app 'src/flask_forge/main.py' run
 
 format:  # Format the code with black.
 	.venv/bin/python -m black --config pyproject.toml .

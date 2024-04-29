@@ -17,7 +17,7 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "src/flask_forge/examples/sqlalchemy/app.py",
+                "FLASK_APP": "src/flask_forge/main.py",
                 "FLASK_DEBUG": "1"
             },
             "args": [

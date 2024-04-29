@@ -5,7 +5,7 @@ from uuid import uuid4
 
 from sqlalchemy import Column, String
 
-from flask_forge.examples.user_database.db import database
+from flask_forge.database.db import database
 
 
 class User(database.Model):
@@ -31,9 +31,9 @@ class User(database.Model):
         """Create a new User object with a provided name and email."""
         # Username checking logic
         if (
-            not name or
-            len(name) < self.MIN_USERNAME_LENGTH
-            or len(name) > self.MAX_USERNAME_LENGTH
+                not name or
+                len(name) < self.MIN_USERNAME_LENGTH
+                or len(name) > self.MAX_USERNAME_LENGTH
         ):
             raise ValueError(
                 f"Username must be between {self.MIN_USERNAME_LENGTH} and "
