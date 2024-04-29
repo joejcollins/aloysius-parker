@@ -1,8 +1,7 @@
 """Handle requests to /user/ endpoint."""
 
 import flask_smorest
-from flask import jsonify, make_response
-from flask.views import MethodView
+from flask import jsonify, make_response, views
 
 from flask_forge.database.user import User
 from flask_forge.model.user import UserSchema
@@ -13,7 +12,7 @@ SMOREST_USER_BLUEPRINT = flask_smorest.Blueprint(
 
 
 @SMOREST_USER_BLUEPRINT.route("/user/<string:uuid>")
-class UserEndpoint(MethodView):
+class UserEndpoint(views.MethodView):
     """Define the endpoint for /users/<uuid>.
 
     This endpoint is used to retrieve and delete an existing user.

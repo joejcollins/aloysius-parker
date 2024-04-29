@@ -3,8 +3,7 @@
 from typing import Any
 
 import flask_smorest
-from flask import jsonify
-from flask.views import MethodView
+from flask import jsonify, views
 from sqlalchemy.exc import SQLAlchemyError
 
 from flask_forge.database.db import database
@@ -17,7 +16,7 @@ SMOREST_USERS_BLUEPRINT = flask_smorest.Blueprint(
 
 
 @SMOREST_USERS_BLUEPRINT.route("/users")
-class UsersEndpoint(MethodView):
+class UsersEndpoint(views.MethodView):
     """Define the endpoint for /users.
 
     This endpoint is used to create a new user via a POST request.
