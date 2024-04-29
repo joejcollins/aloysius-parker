@@ -18,6 +18,11 @@ compile:  # Compile the requirements files using pip-tools.
 	echo "# Add the entire project as a package." >> requirements.dev.txt
 	echo "-e ." >> requirements.dev.txt
 
+docker:  # Build the docker image.
+	docker build \
+		--tag ghcr.io/zengenti/flask-forge:`date +"%Y%m%d"` \
+		.
+
 .PHONY: docs  # because there is a directory called docs.
 docs:  # Build the documentation from the comments and documents.
 	export TZ=UTC
