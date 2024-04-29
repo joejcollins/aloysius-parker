@@ -17,7 +17,6 @@ def create_app() -> Flask:
     database.init_app(the_app)
     with the_app.app_context():
         database.create_all()
-
     return the_app
 
 
