@@ -25,5 +25,3 @@ def run():
     """Run the Flask app."""
     app = create_app()
     app.run()
-
-run()
