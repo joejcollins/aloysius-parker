@@ -1,6 +1,6 @@
 """Add a user to the database and confirm it was added.
 
-By default pytest will run the tests in alpha numeric order so each test should be
+By default, pytest will run the tests in alpha numeric order so each test should be
 named test_001, test_002, test_003, etc.
 """
 
@@ -9,6 +9,7 @@ from typing import Generator
 
 import pytest
 from flask import testing
+
 from flask_forge import main
 
 
@@ -25,7 +26,7 @@ class SharedResources:
         self.user_id = "Not set"
 
 
-@pytest.fixture(name="flask_client")
+@pytest.fixture(scope="module", name="flask_client")
 def create_flask_client() -> Generator:
     """Create a flask test client."""
     flask_api = main.create_app()
@@ -33,10 +34,62 @@ def create_flask_client() -> Generator:
         yield client
 
 
+@pytest.fixture
+def payload():
+    """Return an example payload for a user."""
+    return {
+        "name": "Example",
+        "email": "example@gmail.com",
+    }
+
+
 def test_001_get_empty_user_list(flask_client: testing.FlaskClient) -> None:
     """Post a new redirect using the V2 API."""
     # Act
     response = flask_client.get("/users")
-    # Assert
-    # The list should be empty.
+
+    # Assert response code is 204
     assert response.status_code == HTTPStatus.NO_CONTENT
+
+    # Assert response is actually empty
+    assert not response.text
+
+
+def test_002_add_user(flask_client: testing.FlaskClient, payload) -> None:
+    """Add a user to the database."""
+    # Act
+    response = flask_client.post("/users", json=payload)
+
+    # Assert status code is 201
+    assert response.status_code == HTTPStatus.CREATED
+
+    # Assert response data (JSON) is not empty
+    assert response.json
+
+    # Assert that response data matches our request
+    assert response.json.get("uuid")
+    assert response.json.get("name") == payload["name"]
+    assert response.json.get("email") == payload['email']
+
+
+def test_003_get_user_list(flask_client: testing.FlaskClient, payload) -> None:
+    """Get the list of users and confirm the user was added."""
+    # Act
+    # test_002_add_user(flask_client, payload)  # Re-create the user
+    response = flask_client.get("/users")
+
+    # Assert response code is 200 now that there's a user
+    assert response.status_code == HTTPStatus.OK
+
+    # Assert response is not empty
+    assert response.json
+
+    # Assert the amount of users is 1
+    assert len(response.json) == 1
+
+    # Assert the user data matches the data we added
+    first_user: dict[str] = response.json[0]
+    assert first_user.get("uuid")
+    assert first_user.get("name") == payload["name"]
+    assert first_user.get("email") == payload["email"]
+
