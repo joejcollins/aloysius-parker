@@ -1,4 +1,5 @@
 """Run up the flask api and confirm that it does not break by checking a URL."""
+
 from http import HTTPStatus
 from typing import Generator
 
@@ -16,14 +17,10 @@ def start_flask_server() -> Generator:
     pytest_flask fixtures does include live_server which starts a separate server
     process.
     """
-    yield from integration.run_subprocess(
+    yield from subprocess.run_subprocess(
         [
-            ".venv/bin/flask",
-            "--app",
-            "flask_api_v1_v2.main:FLASK_API",
-            "run",
-            "--host=0.0.0.0",
-            "--port=5000",
+            ".venv/bin/python",
+            "src/flask_forge/main.py",
         ]
     )
 
@@ -31,5 +28,5 @@ def start_flask_server() -> Generator:
 def test_server_is_up_and_running() -> None:
     """Confirm that the server runs and you can access the documents."""
     http_client = retrying_http_client.RetryingHttpClient()
-    response = http_client.get(f"{TESTS.flask_api_url}/ui-swagger/")
+    response = http_client.get("http://127.0.0.1:5000")
     assert response.status_code == HTTPStatus.OK
