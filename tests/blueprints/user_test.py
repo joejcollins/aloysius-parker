@@ -1,6 +1,7 @@
 """Test the user blueprint."""
 
 from http import HTTPStatus
+from typing import Any
 
 import flask
 import pytest
@@ -20,7 +21,7 @@ def app() -> flask_app.Flask:
     return test_app
 
 
-def test_user_get(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
+def test_get_user_found(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
     """Test the retrieval of a user."""
     # ARRANGE
     bogus_user_data: dict = {
@@ -35,3 +36,15 @@ def test_user_get(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
     # ASSERT
     assert response.status_code == HTTPStatus.OK
     assert response.json["email"] == "joebloggs@gmail.com"
+
+
+@pytest.mark.parametrize("invalid_uuid", ["joe_bloggs", " ", 1])
+def test_get_user_not_found(invalid_uuid: Any, client: FlaskClient) -> None:
+    """Test the retrieval of a user with an invalid uuid."""
+    # ARRANGE
+    url = flask.url_for("user.UserEndpoint", uuid=invalid_uuid)
+    # ACT
+    response = client.get(url)
+    # ASSERT
+    assert response.status_code == HTTPStatus.NOT_FOUND
+    assert "not found" in response.json["error"]
