@@ -1,7 +1,8 @@
 name: Build Docker image and push to Dockerhub
 
-# Controls when the action will run. Triggers the workflow on push.
-on: push
+on:
+  push:
+    branches: [ main ]
 
 # Run building the docker image that runs our Flask App?
 jobs:
