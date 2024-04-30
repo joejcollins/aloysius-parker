@@ -17,14 +17,20 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "black",
-    "debugpy",
     "flask",
     "flask_smorest",
     "gunicorn",
-    "mypy", 
-    "pip-tools",
     "prometheus-flask-exporter",
+    "flask_sqlalchemy",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "debugpy",
+    "mypy",
+    "pip-tools",
+    "pre-commit",
     "pytest-flask",
     "pytest-mock",
     "pytest",
@@ -36,7 +42,6 @@ dependencies = [
     "sphinx-autobuild",
     "sphinx-rtd-theme",
     "sphinxcontrib-mermaid",
-    "flask_sqlalchemy",
 ]
 
 [project.urls]

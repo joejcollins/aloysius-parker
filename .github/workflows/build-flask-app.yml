@@ -6,7 +6,7 @@ on: push
 # Run building the docker image that runs our Flask App?
 jobs:
   build-and-push:
-     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout the repo.
@@ -21,12 +21,12 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-   - name: Build and Push Docker Image
+    - name: Build and Push Docker Image
       id: docker_build
       uses: docker/build-push-action@v5
       with:
         context: .
-        file: ./.gitpod.Dockerfile
+        file: ./Dockerfile
         push: true
         tags: |
           zengenti/flask-forge:latest

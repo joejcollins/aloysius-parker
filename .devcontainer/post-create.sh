@@ -1,5 +1,3 @@
 # Post create.
-make venv
-echo "make lint" > .git/hooks/pre-commit
-echo "make test" >> .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
+make venv-dev
+.venv/bin/pre-commit run --all-files

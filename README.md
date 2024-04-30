@@ -4,10 +4,9 @@
 
 ## Setup
 
-In Codespaces:
-
-- Build the virtual environment with `make venv`
-- Verify the environment is setup correctly by doing `make test`
+- Build the virtual environment with `make venv-dev`.
+- Verify the environment is setup correctly by doing `make test`.
+- Run the Flask server with `run`.
 
 To see other options, run `make`
 
@@ -31,4 +30,11 @@ If you wish to run Flask API under a different filename (assuming **main.py**) y
 ## Common issues
 
 - **OSError: [Errno 98]** or **OSError: [WinError 10013]**
-  - This means that the port you selected (5000 by default) is already in use. You can either [find the program that is using the port](https://flask.palletsprojects.com/en/3.0.x/server/#address-already-in-use) and terminate it (which can be another instance of Flask API), or for a quick fix you can select a different port using the `--port` argument.
+  - This means that the port you selected (5000 by default) is already in use.
+    You can either [find the program that is using the port](https://flask.palletsprojects.com/en/3.0.x/server/#address-already-in-use)
+    and terminate it (which can be another instance of Flask API),
+    or for a quick fix you can select a different port using the `--port` argument.
+
+- **Address already in use**
+  - On Linux the development server might already be running.
+    Use `make kill` to terminate processes running on port 5000.

@@ -16,12 +16,12 @@ jobs:
           clean: true
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11' 
+          python-version: '3.11'
       - name: Create the virtual environment and run tests.
         env:
           SOURCERY_TOKEN: ${{ secrets.SOURCERY_TOKEN }}
         run: |
-          make venv
+          make venv-dev
           make report
           make lint
           make test
