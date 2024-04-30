@@ -44,9 +44,6 @@ dev = [
     "sphinxcontrib-mermaid",
 ]
 
-[project.urls]
-"repository" = "https://github.com/zengenti/flask-forge"
-
 [project.scripts]
 run = "flask_forge.main:run"
 
