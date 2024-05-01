@@ -1,13 +1,13 @@
-# Get ubuntu image
-FROM python:3.12.3-bullseye
+# Get ubuntu image with python 3.12 and virtual environment setup
+FROM flask-forge-venv:latest
 
 # Set working directory and copy the project files
 WORKDIR /app
-COPY pyproject.toml requirements.txt Makefile src /app/
 
-# Build the virtual environment
-RUN eval "$(pyenv init -)" \
- && make venv
+ARG GITHUB_TOKEN
+RUN echo $GITHUB_TOKEN
+# Set the GitHub access token as an environment variable
+RUN pip install git+https://zengenti:$GITHUB_TOKEN@github.com/zengenti/flask-forge.git#egg=flask-forge
 
 ENV PATH="/app/.venv/bin:${PATH}"
 

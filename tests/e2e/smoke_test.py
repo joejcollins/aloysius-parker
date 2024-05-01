@@ -6,7 +6,7 @@ from typing import Generator
 import pytest
 from flask_forge.extensions import retrying_http_client
 
-from tests.integration import subprocess
+from tests.e2e import subprocess
 
 
 @pytest.fixture(autouse=True)

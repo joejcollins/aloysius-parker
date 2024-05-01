@@ -10,8 +10,12 @@ from flask_forge import main
 
 def is_bad_response(response: werkzeug.test.TestResponse) -> bool:
     """Return True if the code is in the 4XX zone and JSON is present."""
-    return (HTTPStatus.BAD_REQUEST <= response.status_code <
-            HTTPStatus.INTERNAL_SERVER_ERROR and response.json)
+    return (
+        HTTPStatus.BAD_REQUEST
+        <= response.status_code
+        < HTTPStatus.INTERNAL_SERVER_ERROR
+        and response.json
+    )
 
 
 @pytest.fixture(scope="module", name="flask_client")
@@ -65,10 +69,7 @@ def test_004_add_user_invalid_email(flask_client: testing.FlaskClient) -> None:
 def test_004_add_user_length_username(flask_client: testing.FlaskClient) -> None:
     """Test if requests with extremely long usernames fail."""
     # Act
-    data = {
-        "name": "I like buffer overflows" * 100,
-        "email": "yes@gmail.com"
-    }
+    data = {"name": "I like buffer overflows" * 100, "email": "yes@gmail.com"}
     response = flask_client.post("/users", json=data)
 
     # Assert that the request was rejected
