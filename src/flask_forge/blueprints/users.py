@@ -8,7 +8,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from flask_forge.database.db import database
 from flask_forge.database.user import User
-from flask_forge.model.user import UserSchema
+from flask_forge.models.user import UserSchema
 
 SMOREST_USERS_BLUEPRINT = flask_smorest.Blueprint(
     "users", __name__, description="Management of the users."

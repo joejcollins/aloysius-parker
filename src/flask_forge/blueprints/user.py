@@ -4,7 +4,7 @@ import flask_smorest
 from flask import jsonify, make_response, views
 
 from flask_forge.database.user import User
-from flask_forge.model.user import UserSchema
+from flask_forge.models.user import UserSchema
 
 SMOREST_USER_BLUEPRINT = flask_smorest.Blueprint(
     "user", __name__, description="Management of individual users."
