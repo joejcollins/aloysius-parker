@@ -48,12 +48,12 @@ def create_flask_client() -> Generator:
         yield client
 
 
-def is_user_same(user: dict[str], resources: SharedResources) -> bool:
+def is_user_same(user: dict[str, str], resources: SharedResources) -> bool:
     """Return True if the user and payload are the same."""
     return (
-            user.get("name") == resources.name
-            and user.get("email") == resources.email
-            and (user.get("uuid") == resources.uuid or not resources.uuid)
+        user.get("name") == resources.name
+        and user.get("email") == resources.email
+        and (user.get("uuid") == resources.uuid or not resources.uuid)
     )
 
 
@@ -70,8 +70,7 @@ def test_001_get_empty_user_list(flask_client: testing.FlaskClient) -> None:
 
 
 def test_002_add_user(
-        flask_client: testing.FlaskClient,
-        resources: SharedResources
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Test if we can successfully add a user to the database."""
     # Act
@@ -91,8 +90,7 @@ def test_002_add_user(
 
 
 def test_003_get_user(
-        flask_client: testing.FlaskClient,
-        resources: SharedResources
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Test if we can successfully retrieve the user from the database."""
     # Act
@@ -109,8 +107,7 @@ def test_003_get_user(
 
 
 def test_004_get_user_list(
-        flask_client: testing.FlaskClient,
-        resources: SharedResources
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Test if the user is included in the global user list."""
     # Act
