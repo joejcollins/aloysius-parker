@@ -23,7 +23,22 @@ class SharedResources:
 
     def __init__(self) -> None:
         """Initialize the tokens."""
-        self.user_id = "Not set"
+        self.uuid = None
+        self.name = "example"
+        self.email = "example@gmail.com"
+
+    def payload(self):
+        """Return an example payload for a user."""
+        return {
+            "name": self.name,
+            "email": self.email,
+        }
+
+
+@pytest.fixture(name="resources", scope="module")
+def shared_resources() -> SharedResources:
+    """Return the shared resources object."""
+    return SharedResources()
 
 
 @pytest.fixture(scope="module", name="flask_client")
@@ -34,17 +49,17 @@ def create_flask_client() -> Generator:
         yield client
 
 
-@pytest.fixture
-def payload():
-    """Return an example payload for a user."""
-    return {
-        "name": "Example",
-        "email": "example@gmail.com",
-    }
+def is_user_same(user: dict[str], resources: SharedResources) -> bool:
+    """Return True if the user and payload are the same."""
+    return (
+            user.get("name") == resources.name
+            and user.get("email") == resources.email
+            and (user.get("uuid") == resources.uuid or not resources.uuid)
+    )
 
 
 def test_001_get_empty_user_list(flask_client: testing.FlaskClient) -> None:
-    """Post a new redirect using the V2 API."""
+    """Test if GET request to /users with 0 users responds with 204 No content."""
     # Act
     response = flask_client.get("/users")
 
@@ -55,10 +70,13 @@ def test_001_get_empty_user_list(flask_client: testing.FlaskClient) -> None:
     assert not response.text
 
 
-def test_002_add_user(flask_client: testing.FlaskClient, payload) -> None:
-    """Add a user to the database."""
+def test_002_add_user(
+        flask_client: testing.FlaskClient,
+        resources: SharedResources
+) -> None:
+    """Test if we can successfully add a user to the database."""
     # Act
-    response = flask_client.post("/users", json=payload)
+    response = flask_client.post("/users", json=resources.payload())
 
     # Assert status code is 201
     assert response.status_code == HTTPStatus.CREATED
@@ -67,15 +85,36 @@ def test_002_add_user(flask_client: testing.FlaskClient, payload) -> None:
     assert response.json
 
     # Assert that response data matches our request
-    assert response.json.get("uuid")
-    assert response.json.get("name") == payload["name"]
-    assert response.json.get("email") == payload['email']
+    assert is_user_same(response.json, resources)
+
+    # Save UUID for later tests
+    resources.uuid = response.json.get("uuid")
 
 
-def test_003_get_user_list(flask_client: testing.FlaskClient, payload) -> None:
-    """Get the list of users and confirm the user was added."""
+def test_003_get_user(
+        flask_client: testing.FlaskClient,
+        resources: SharedResources
+) -> None:
+    """Test if we can successfully retrieve the user from the database."""
     # Act
-    # test_002_add_user(flask_client, payload)  # Re-create the user
+    response = flask_client.get(f"/user/{resources.uuid}")
+
+    # Assert response code is 200 now that there's a user
+    assert response.status_code == HTTPStatus.OK
+
+    # Assert response is not empty
+    assert response.json
+
+    # Assert the user data matches the data we added
+    assert is_user_same(response.json, resources)
+
+
+def test_004_get_user_list(
+        flask_client: testing.FlaskClient,
+        resources: SharedResources
+) -> None:
+    """Test if the user is included in the global user list."""
+    # Act
     response = flask_client.get("/users")
 
     # Assert response code is 200 now that there's a user
@@ -89,7 +128,4 @@ def test_003_get_user_list(flask_client: testing.FlaskClient, payload) -> None:
 
     # Assert the user data matches the data we added
     first_user: dict[str] = response.json[0]
-    assert first_user.get("uuid")
-    assert first_user.get("name") == payload["name"]
-    assert first_user.get("email") == payload["email"]
-
+    assert is_user_same(first_user, resources)
