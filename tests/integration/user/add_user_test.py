@@ -9,7 +9,6 @@ from typing import Generator
 
 import pytest
 from flask import testing
-
 from flask_forge import main
 
 
