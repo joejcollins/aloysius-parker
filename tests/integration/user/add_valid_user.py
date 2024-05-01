@@ -5,7 +5,6 @@ from typing import Generator
 import pytest
 import werkzeug.test
 from flask import testing
-
 from flask_forge import main
 
 
@@ -19,6 +18,7 @@ def is_bad_response(response: werkzeug.test.TestResponse) -> bool:
 def create_flask_client() -> Generator:
     """Create a flask test client."""
     flask_api = main.create_app()
+    flask_api.config["TESTING"] = True
     with flask_api.test_client() as client:
         yield client
 

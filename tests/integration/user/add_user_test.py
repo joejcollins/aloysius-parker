@@ -44,6 +44,7 @@ def shared_resources() -> SharedResources:
 def create_flask_client() -> Generator:
     """Create a flask test client."""
     flask_api = main.create_app()
+    flask_api.config["TESTING"] = True
     with flask_api.test_client() as client:
         yield client
 
