@@ -3,8 +3,7 @@
 import flask_smorest
 from flask import app
 
-from flask_forge.blueprints import home, user, users
-from flask_forge.models import errors
+from flask_forge.blueprints import convenience, home, user, users
 
 
 def configure_blueprints(flask_api: app.Flask) -> None:
@@ -13,4 +12,4 @@ def configure_blueprints(flask_api: app.Flask) -> None:
     flask_api: flask_smorest.Api = flask_smorest.Api(flask_api)
     flask_api.register_blueprint(user.SMOREST_USER_BLUEPRINT)
     flask_api.register_blueprint(users.SMOREST_USERS_BLUEPRINT)
-    flask_api.ERROR_SCHEMA = errors.ErrorSchema
+    flask_api.register_blueprint(convenience.SMOREST_CONVENIENCE_BLUEPRINT)

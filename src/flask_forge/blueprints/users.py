@@ -6,8 +6,7 @@ import flask_smorest
 from flask import jsonify, views
 from sqlalchemy.exc import SQLAlchemyError
 
-from flask_forge.database.db import database
-from flask_forge.database.user import User
+from flask_forge.handler import users
 from flask_forge.models.user import UserSchema
 
 SMOREST_USERS_BLUEPRINT = flask_smorest.Blueprint(
@@ -26,10 +25,7 @@ class UsersEndpoint(views.MethodView):
     @SMOREST_USERS_BLUEPRINT.response(200)
     def get(self):
         """Retrieve all users."""
-        if users := [user.to_json() for user in User.query.all()]:
-            return users
-
-        return "", 204
+        return users.get_users()
 
     @SMOREST_USERS_BLUEPRINT.response(201)
     @SMOREST_USERS_BLUEPRINT.arguments(UserSchema)
@@ -39,14 +35,10 @@ class UsersEndpoint(views.MethodView):
         email = data.get("email")
 
         try:
-            with database.session.begin():
-                user = User(name, email)
-                database.session.add(user)
+            return users.create_user(name, email)
         except ValueError as e:
-            return jsonify(error=str(e)), 400
+            return jsonify(error=f"user validation error: {e}"), 400
         except SQLAlchemyError as e:
             return jsonify(error=f"database error: {e}"), 500
         except Exception as e:
             return jsonify(error=f"internal server error: {e}"), 500
-
-        return user.to_json()
