@@ -10,7 +10,7 @@ from flask import app as flask_app
 from flask.testing import FlaskClient
 from flask_forge import main
 from flask_forge.database import user
-from sqlalchemy.orm import query, scoping
+from sqlalchemy.orm import scoping
 
 
 @pytest.fixture()
