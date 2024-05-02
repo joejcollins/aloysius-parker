@@ -4,6 +4,7 @@
     "words": [
         "abcdefghijklmnopqrstuvwxyz",
         "autouse",
+        "azuretools",
         "Bloggs",
         "caplog",
         "charliermarsh",
@@ -19,6 +20,7 @@
         "smorest",
         "sourcery",
         "SQLALCHEMY",
+        "tamasfe",
         "Udemy",
         "venv",
         "werkzeug",
