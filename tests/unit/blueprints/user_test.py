@@ -24,6 +24,7 @@ def app() -> flask_app.Flask:
 def test_get_user_found(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
     """Test the retrieval of a user."""
     # ARRANGE
+    # Patch over the get on the session so it always returns the bogus user.
     bogus_user_data: dict = {
         "name": "Joe Bloggs",
         "email": "joebloggs@gmail.com",
