@@ -19,6 +19,7 @@
         "smorest",
         "sourcery",
         "SQLALCHEMY",
+        "tamasfe",
         "Udemy",
         "venv",
         "werkzeug",
