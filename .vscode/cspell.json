@@ -11,6 +11,7 @@
         "devcontainer",
         "devcontainers",
         "eamodio",
+        "endregion",
         "Errno",
         "isort",
         "jsonify",
@@ -20,6 +21,7 @@
         "SQLALCHEMY",
         "Udemy",
         "venv",
+        "werkzeug",
         "wsgi",
         "Zengenti"
     ]

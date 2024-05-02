@@ -12,6 +12,7 @@ from flask import testing
 from flask_forge import main
 
 
+# region Fixtures and helper functions
 class SharedResources:
     """Resources shared between the tests.
 
@@ -49,83 +50,68 @@ def create_flask_client() -> Generator:
         yield client
 
 
-def is_user_same(user: dict[str], resources: SharedResources) -> bool:
+def is_user_same(user: dict[str, str], resources: SharedResources) -> bool:
     """Return True if the user and payload are the same."""
     return (
-            user.get("name") == resources.name
-            and user.get("email") == resources.email
-            and (user.get("uuid") == resources.uuid or not resources.uuid)
+        user.get("name") == resources.name
+        and user.get("email") == resources.email
+        and (user.get("uuid") == resources.uuid or not resources.uuid)
     )
+
+
+# endregion
 
 
 def test_001_get_empty_user_list(flask_client: testing.FlaskClient) -> None:
     """Test if GET request to /users with 0 users responds with 204 No content."""
     # Act
     response = flask_client.get("/users")
-
-    # Assert response code is 204
+    # Assert
+    # There should be no content because there are no users.
     assert response.status_code == HTTPStatus.NO_CONTENT
-
-    # Assert response is actually empty
+    # as a result, the response should be empty
     assert not response.text
 
 
-def test_002_add_user(
-        flask_client: testing.FlaskClient,
-        resources: SharedResources
+def test_002_add_a_new_user(
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Test if we can successfully add a user to the database."""
     # Act
     response = flask_client.post("/users", json=resources.payload())
-
-    # Assert status code is 201
+    # Assert
+    # The status should confirm the user was added.
     assert response.status_code == HTTPStatus.CREATED
-
-    # Assert response data (JSON) is not empty
-    assert response.json
-
-    # Assert that response data matches our request
+    # and the returned user should be the same as the one sent.
     assert is_user_same(response.json, resources)
-
-    # Save UUID for later tests
+    # Store UUID for later tests
     resources.uuid = response.json.get("uuid")
 
 
-def test_003_get_user(
-        flask_client: testing.FlaskClient,
-        resources: SharedResources
+def test_003_get_the_new_user_back_again(
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Test if we can successfully retrieve the user from the database."""
     # Act
     response = flask_client.get(f"/user/{resources.uuid}")
-
-    # Assert response code is 200 now that there's a user
+    # Assert
+    # Confirm the user was found.
     assert response.status_code == HTTPStatus.OK
-
-    # Assert response is not empty
-    assert response.json
-
-    # Assert the user data matches the data we added
+    # and the user is the same as the one we added.
     assert is_user_same(response.json, resources)
 
 
-def test_004_get_user_list(
-        flask_client: testing.FlaskClient,
-        resources: SharedResources
+def test_004_check_that_there_is_only_one_user(
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Test if the user is included in the global user list."""
     # Act
     response = flask_client.get("/users")
-
-    # Assert response code is 200 now that there's a user
+    # Assert
+    # Confirm that the end point responses.
     assert response.status_code == HTTPStatus.OK
-
-    # Assert response is not empty
-    assert response.json
-
-    # Assert the amount of users is 1
+    # and that there is only one user in the list.
     assert len(response.json) == 1
-
-    # Assert the user data matches the data we added
-    first_user: dict[str] = response.json[0]
+    # Confirm that the user data matches the data we added.
+    first_user: dict[str, str] = response.json[0]
     assert is_user_same(first_user, resources)

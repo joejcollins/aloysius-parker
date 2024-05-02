@@ -1,4 +1,5 @@
 """Flask application for rapid deployment via Docker."""
+
 from flask import Flask
 
 from flask_forge.config import blueprints, monitoring, open_api
@@ -20,7 +21,7 @@ def create_app() -> Flask:
 def run():
     """Run the Flask app."""
     app = create_app()
-    app.run()
+    app.run(host="0.0.0.0")
 
 
 if __name__ == "__main__":

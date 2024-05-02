@@ -1,1 +1,1 @@
-"""User integrations tests."""
+"""User integration tests based on user stories."""

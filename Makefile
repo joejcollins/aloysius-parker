@@ -18,8 +18,13 @@ compile:  # Compile the requirements files using pip-tools.
 	echo "# Add the entire project as a package." >> requirements.dev.txt
 	echo "-e ." >> requirements.dev.txt
 
-docker:  # Build the docker image.
+docker:  # Build the docker images.
 	docker build \
+		-t ghcr.io/zengenti/flask-forge-venv:latest \
+		-f Dockerfile.python \
+		.
+	docker build \
+		--build-arg GITHUB_TOKEN=$$REPO_AND_PACKAGES_TOKEN \
 		--tag ghcr.io/zengenti/flask-forge:`date +"%Y%m%d"` \
 		.
 

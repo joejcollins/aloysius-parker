@@ -4,7 +4,7 @@ import flask_smorest
 from flask import app
 
 from flask_forge.blueprints import home, user, users
-from flask_forge.model import errors
+from flask_forge.models import errors
 
 
 def configure_blueprints(flask_api: app.Flask) -> None:

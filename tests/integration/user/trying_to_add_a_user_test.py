@@ -1,21 +1,28 @@
-"""Represent a series of unfortunate yet bad sign-up attempts."""
+"""Attempt to add a new user but continually get it wrong.
+
+These are really separate user stories so could be split into separate test modules, but
+for the sake of convenience, they are all in one test module.
+"""
+
 from http import HTTPStatus
-from typing import Generator
+from typing import Any, Generator
 
 import pytest
-import werkzeug.test
 from flask import testing
 from flask_forge import main
+from werkzeug import test
 
 
-def is_bad_response(response: werkzeug.test.TestResponse) -> bool:
+# region Fixtures and helper functions
+def is_bad_response(response: test.TestResponse) -> Any:
     """Return True if the code is in the 4XX zone and JSON is present."""
-    return (
+    is_a_400_code = (
         HTTPStatus.BAD_REQUEST
         <= response.status_code
         < HTTPStatus.INTERNAL_SERVER_ERROR
-        and response.json
     )
+    has_json = response.json
+    return is_a_400_code and has_json
 
 
 @pytest.fixture(scope="module", name="flask_client")
@@ -25,6 +32,9 @@ def create_flask_client() -> Generator:
     flask_api.config["TESTING"] = True
     with flask_api.test_client() as client:
         yield client
+
+
+# endregion
 
 
 def test_001_add_user_empty_fields(flask_client: testing.FlaskClient) -> None:
