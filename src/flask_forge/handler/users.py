@@ -1,3 +1,4 @@
+"""Handle functions for /blueprints/users.py."""
 from flask_forge.database.db import database
 from flask_forge.database.user import User
 

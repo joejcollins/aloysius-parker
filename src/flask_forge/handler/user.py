@@ -1,3 +1,4 @@
+"""Handle functions for /blueprints/user.py."""
 from flask import jsonify
 
 from flask_forge.database.db import database
