@@ -10,7 +10,7 @@ from flask import app as flask_app
 from flask.testing import FlaskClient
 from flask_forge import main
 from flask_forge.database import user
-from sqlalchemy.orm import query
+from sqlalchemy.orm import query, scoping
 
 
 @pytest.fixture()
@@ -29,7 +29,9 @@ def test_get_user_found(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
         "email": "joebloggs@gmail.com",
     }
     bogus_user: user.User = user.User(**bogus_user_data)
-    monkeypatch.setattr(query.Query, "get", lambda self, uuid: bogus_user)
+    monkeypatch.setattr(
+        scoping.scoped_session, "get", lambda self, entity, uuid: bogus_user
+    )
     url = flask.url_for("user.UserEndpoint", uuid="7e557495d9104520a017773b9fc7bd5e")
     # ACT
     response = client.get(url)
