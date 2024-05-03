@@ -16,11 +16,13 @@ jobs:
         with:
           submodules: false
           clean: true
-      - name: Create the virtual environment and run tests.
+      - name: Symlink to virtual environment in container image
+        run: |
+          ln -s .venv/bin/python /usr/src/.venv/bin/python
+      - name: Run tests.
         env:
           SOURCERY_TOKEN: ${{ secrets.SOURCERY_TOKEN }}
         run: |
-          make venv-dev
           make report
           make lint
           make test
