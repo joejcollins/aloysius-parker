@@ -1,7 +1,7 @@
 # Get ubuntu image with python 3.12 and virtual environment setup
 FROM ghcr.io/zengenti/flask-forge-dev:latest
 
-# Set working directory 
+# Set working directory
 WORKDIR /app
 
 # copy over everything in workspace, excluding .dockerignore contents
