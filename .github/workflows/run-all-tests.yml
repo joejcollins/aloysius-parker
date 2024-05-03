@@ -7,7 +7,7 @@ on:
 
 jobs:
   run_python_tests:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     container:
       image: ghcr.io/zengenti/flask-forge-dev:latest
     steps:
