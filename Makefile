@@ -64,11 +64,16 @@ venv:  # Install the requirements for Python.
 	.venv/bin/python -m pip install --upgrade pip setuptools
 	.venv/bin/python -m pip install -r requirements.txt
 
-venv-dev:  # Install the development requirements for Python.
+venv-dev:  # Install the development requirements for Python. With git hook.
 	python -m venv .venv
 	.venv/bin/python -m pip install --upgrade pip setuptools
 	.venv/bin/python -m pip install -r requirements.dev.txt
 	.venv/bin/pre-commit install
+
+venv-dev-no-git:  # Install the development requirements for Python. Without git hook.
+	python -m venv .venv
+	.venv/bin/python -m pip install --upgrade pip setuptools
+	.venv/bin/python -m pip install -r requirements.dev.txt
 
 test:  # Run the tests.
 	.venv/bin/python -m pytest ./tests

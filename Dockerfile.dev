@@ -10,4 +10,4 @@ COPY Makefile .
 
 # Build the development virtual environment
 RUN eval "$(pyenv init -)" \
- && make venv-dev
+ && make venv-dev-no-git
