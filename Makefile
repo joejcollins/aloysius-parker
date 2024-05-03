@@ -20,11 +20,10 @@ compile:  # Compile the requirements files using pip-tools.
 
 docker:  # Build the docker images.
 	docker build \
-		-t ghcr.io/zengenti/flask-forge-venv:latest \
-		-f Dockerfile.python \
+		-t ghcr.io/zengenti/flask-forge-dev:latest \
+		-f Dockerfile.dev \
 		.
 	docker build \
-		--build-arg GITHUB_TOKEN=$$REPO_AND_PACKAGES_TOKEN \
 		--tag ghcr.io/zengenti/flask-forge:`date +"%Y%m%d"` \
 		.
 

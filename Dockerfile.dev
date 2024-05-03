@@ -4,11 +4,10 @@ FROM python:3.12.3-bullseye
 # Setup working directory and copy the project files
 RUN mkdir -p /usr/src/
 WORKDIR /usr/src
-COPY requirements.txt .
 COPY requirements.dev.txt .
 COPY pyproject.toml .
 COPY Makefile .
 
-# Build the virtual environment
+# Build the development virtual environment
 RUN eval "$(pyenv init -)" \
- && make venv
+ && make venv-dev
