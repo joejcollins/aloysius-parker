@@ -20,11 +20,10 @@ compile:  # Compile the requirements files using pip-tools.
 
 docker:  # Build the docker images.
 	docker build \
-		-t ghcr.io/zengenti/flask-forge-venv:latest \
-		-f Dockerfile.python \
+		-t ghcr.io/zengenti/flask-forge-dev:latest \
+		-f Dockerfile.dev \
 		.
 	docker build \
-		--build-arg GITHUB_TOKEN=$$REPO_AND_PACKAGES_TOKEN \
 		--tag ghcr.io/zengenti/flask-forge:`date +"%Y%m%d"` \
 		.
 
@@ -65,11 +64,16 @@ venv:  # Install the requirements for Python.
 	.venv/bin/python -m pip install --upgrade pip setuptools
 	.venv/bin/python -m pip install -r requirements.txt
 
-venv-dev:  # Install the development requirements for Python.
+venv-dev:  # Install the development requirements for Python. With git hook.
 	python -m venv .venv
 	.venv/bin/python -m pip install --upgrade pip setuptools
 	.venv/bin/python -m pip install -r requirements.dev.txt
 	.venv/bin/pre-commit install
+
+venv-dev-no-git:  # Install the development requirements for Python. Without git hook.
+	python -m venv .venv
+	.venv/bin/python -m pip install --upgrade pip setuptools
+	.venv/bin/python -m pip install -r requirements.dev.txt
 
 test:  # Run the tests.
 	.venv/bin/python -m pytest ./tests

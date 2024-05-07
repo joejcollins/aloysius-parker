@@ -8,20 +8,22 @@ on:
 jobs:
   run_python_tests:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/zengenti/flask-forge-dev:latest
+      options: --user root # needs to be root or the checkout fails.
     steps:
       - name: Checkout the repo.
         uses: actions/checkout@v4
         with:
           submodules: false
           clean: true
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Create the virtual environment and run tests.
+      - name: Symlink to virtual environment in container image
+        run: |
+          ln -s .venv/bin/python /usr/src/.venv/bin/python
+      - name: Run tests.
         env:
           SOURCERY_TOKEN: ${{ secrets.SOURCERY_TOKEN }}
         run: |
-          make venv-dev
           make report
           make lint
           make test
