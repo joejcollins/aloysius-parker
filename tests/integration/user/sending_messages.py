@@ -1,5 +1,5 @@
 """Test message sending functionality."""
-
+from datetime import datetime
 from http import HTTPStatus
 from typing import Generator
 
@@ -17,6 +17,7 @@ class SharedResources:
         """Initialize the tokens."""
         self.adam = None
         self.eve = None
+        self.content: str = "Ate a weird fruit, now I'm feeling a little... ex-posed."
 
 
 @pytest.fixture(name="resources", scope="module")
@@ -52,8 +53,11 @@ def test_001_create_users(flask_client: testing.FlaskClient,
         assert response.status_code == HTTPStatus.CREATED
         assert response.text
 
-    resources.adam = User.from_json(response.text)
-    resources.eve = User.from_json(response.text)
+        # Update the resources with the created user
+        if account["name"] == "Adam":
+            resources.adam = User.from_json(response.text)
+        elif account["name"] == "Eve":
+            resources.eve = User.from_json(response.text)
 
 
 def test_002_send_message(flask_client: testing.FlaskClient,
@@ -61,9 +65,9 @@ def test_002_send_message(flask_client: testing.FlaskClient,
     """Send a message from Adam to Eve."""
     # Arrange
 
-    message = {
+    message: dict[str, str] = {
         "author_id": resources.adam.id,
-        "content": "Hello, Eve!"
+        "content": resources.content,
     }
 
     # Act
@@ -71,7 +75,28 @@ def test_002_send_message(flask_client: testing.FlaskClient,
         f"/user/{resources.eve.id}/messages", json=message
     )
 
-    # Assert
-    print(response.json)
+    # Assert the message was created and that the content is in the response
     assert response.status_code == HTTPStatus.CREATED
-    assert response.text
+    assert resources.content in response.text
+
+    # Assert the timestamp of the message is not far off current time
+    date_without_time = datetime.now().isoformat()[:10]
+    assert "timestamp" in response.json
+    assert date_without_time in response.json["timestamp"]
+
+
+def test_003_fetch_messages(flask_client: testing.FlaskClient,
+                            resources: SharedResources) -> None:
+    """Fetch messages for Eve."""
+    # Act
+    response = flask_client.get(f"/user/{resources.eve.id}/messages")
+
+    # Assert that there's only 1 message
+    assert len(response.json) == 1
+
+    # Assert that it's from Adam
+    print(response.json)
+    assert response.json[0]["author_id"] == resources.adam.id
+
+    # Assert that the content is the same
+    assert resources.content == response.json[0]["content"]

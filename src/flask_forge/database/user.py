@@ -36,8 +36,6 @@ class User(database.Model):
                 uuid.UUID(hex=id, version=4)
             except ValueError:
                 raise ValueError("Invalid existing user ID")
-            else:
-                self.id: str = id
 
         # Username checking logic
         if (
@@ -75,7 +73,7 @@ class User(database.Model):
                 f"Only {', '.join(self.ALLOWED_EMAIL_PROVIDER_DOMAINS)} are allowed."
             )
 
-        self.id: str = uuid.uuid4().hex
+        self.id: str = id or uuid.uuid4().hex
         self.name: str = name
         self.email: str = email
 

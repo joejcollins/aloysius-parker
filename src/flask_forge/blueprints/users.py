@@ -17,7 +17,7 @@ class UsersEndpoint(views.MethodView):
     """Define the endpoint for /users.
 
     This endpoint is used to create a new user via a POST request.
-    It's separate from UserEndpoint as this endpoint does not accept a id.
+    It's separate from UserEndpoint as this endpoint does not accept an ID.
     """
 
     @SMOREST_USERS_BLUEPRINT.response(200)

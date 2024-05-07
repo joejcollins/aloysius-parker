@@ -43,8 +43,8 @@ class Message(database.Model):
         """Return a JSON representation of the message."""
         return {
             "id": self.id,
-            "author": self.author_id,
-            "recipient": self.recipient_id,
+            "author_id": self.author_id,
+            "recipient_id": self.recipient_id,
             "content": self.content,
             "timestamp": self.timestamp.isoformat(),
         }

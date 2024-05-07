@@ -6,17 +6,17 @@ from flask_forge.database.message import Message
 from flask_forge.database.user import User
 
 
-def fetch_user(id: str):
+def fetch_user(user_id: str):
     """Fetch a user based on id."""
-    if user := database.session.get(User, id):
+    if user := database.session.get(User, user_id):
         return user.to_json()
     else:
         return jsonify(error="user not found"), 404
 
 
-def delete_user(id: str):
+def delete_user(user_id: str):
     """Delete a user based on id."""
-    if database.session.filter_by(User, id=id).delete():
+    if database.session.filter_by(User, id=user_id).delete():
         return "", 204
     else:
         return jsonify(error="user not found"), 404
@@ -34,7 +34,7 @@ def get_user_messages(user_id: str):
     if not messages:
         return "", 204
 
-    return {"messages": [message.to_json() for message in messages]}
+    return [message.to_json() for message in messages]
 
 
 def send_user_message(author_id: str, recipient_id: str, content: str):
