@@ -10,7 +10,7 @@ from flask import app as flask_app
 from flask.testing import FlaskClient
 from flask_forge import main
 from flask_forge.database import user
-from sqlalchemy.orm import query
+from sqlalchemy.orm import scoping
 
 
 @pytest.fixture()
@@ -29,10 +29,14 @@ def test_get_user_found(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
         "email": "joebloggs@gmail.com",
     }
     bogus_user: user.User = user.User(**bogus_user_data)
-    monkeypatch.setattr(query.Query, "get", lambda self, uuid: bogus_user)
+    monkeypatch.setattr(
+        scoping.scoped_session, "get", lambda self, entity, uuid: bogus_user
+    )
     url = flask.url_for("user.UserEndpoint", uuid="7e557495d9104520a017773b9fc7bd5e")
+
     # ACT
     response = client.get(url)
+
     # ASSERT
     assert response.status_code == HTTPStatus.OK
     assert response.json["email"] == "joebloggs@gmail.com"
@@ -43,8 +47,82 @@ def test_get_user_not_found(invalid_uuid: Any, client: FlaskClient) -> None:
     """Test the retrieval of a user with an invalid uuid."""
     # ARRANGE
     url = flask.url_for("user.UserEndpoint", uuid=invalid_uuid)
+
     # ACT
     response = client.get(url)
+
     # ASSERT
     assert response.status_code == HTTPStatus.NOT_FOUND
     assert "not found" in response.json["error"]
+
+
+def test_create_user_invalid_email(client: FlaskClient) -> None:
+    """Test the creation of a user with an invalid email."""
+    # ARRANGE
+    invalid_user_data: dict = {
+        "name": "Joe Bloggs",
+        "email": "joebloggsgmail.com",  # No @ in the email
+    }
+    url = flask.url_for("users.UsersEndpoint")
+
+    # ACT
+    response = client.post(url, json=invalid_user_data)
+
+    # ASSERT
+    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert "Invalid email address" in response.json["error"]
+
+
+def test_create_user_username_too_long(client: FlaskClient) -> None:
+    """Test the creation of a user with an invalid username."""
+    # ARRANGE
+    invalid_user_data: dict = {
+        "name": "Joe" * 100,
+        "email": "joebloggs@gmail.com",
+    }
+
+    url = flask.url_for("users.UsersEndpoint")
+    # ACT
+    response = client.post(url, json=invalid_user_data)
+
+    # ASSERT
+    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert "Username must be between" in response.json["error"]
+
+
+def test_create_user_bad_email_provider(client: FlaskClient) -> None:
+    """Test the creation of a user with an invalid email provider."""
+    # ARRANGE
+    invalid_user_data: dict = {
+        "name": "Joe Bloggs",
+        "email": "joebloggs@invalid.com",  # Invalid email provider
+    }
+    url = flask.url_for("users.UsersEndpoint")
+
+    # ACT
+    response = client.post(url, json=invalid_user_data)
+
+    # ASSERT
+    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert "user validation error:" in response.json["error"]
+    # TODO: Consider error codes in the future..?
+
+
+@pytest.mark.parametrize("data", [
+    ({"name": "", "email": "joebloggs@gmail.com"}),
+    ({"name": "Joe", "email": ""}),
+    ({"name": "J", "email": "joebloggs@gmail.com"}),
+    ({"name": "Joe", "email": "j"})
+])
+def test_create_user_invalid_email_or_username(data: dict, client: FlaskClient) -> None:
+    """Test the creation of a user with an invalid email or username."""
+    # ARRANGE
+    url = flask.url_for("users.UsersEndpoint")
+
+    # ACT
+    response = client.post(url, json=data)
+
+    # ASSERT
+    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert ("Username must be between" in response.json["error"]
+            or "Invalid email address" in response.json["error"])
