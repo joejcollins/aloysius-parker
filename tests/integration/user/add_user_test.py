@@ -23,7 +23,7 @@ class SharedResources:
 
     def __init__(self) -> None:
         """Initialize the tokens."""
-        self.uuid = None
+        self.id = None
         self.name = "example"
         self.email = "example@gmail.com"
 
@@ -55,7 +55,7 @@ def is_user_same(user: dict[str, str], resources: SharedResources) -> bool:
     return (
         user.get("name") == resources.name
         and user.get("email") == resources.email
-        and (user.get("uuid") == resources.uuid or not resources.uuid)
+        and (user.get("id") == resources.id or not resources.id)
     )
 
 
@@ -84,8 +84,8 @@ def test_002_add_a_new_user(
     assert response.status_code == HTTPStatus.CREATED
     # and the returned user should be the same as the one sent.
     assert is_user_same(response.json, resources)
-    # Store UUID for later tests
-    resources.uuid = response.json.get("uuid")
+    # Store id for later tests
+    resources.id = response.json.get("id")
 
 
 def test_003_get_the_new_user_back_again(
@@ -93,7 +93,7 @@ def test_003_get_the_new_user_back_again(
 ) -> None:
     """Test if we can successfully retrieve the user from the database."""
     # Act
-    response = flask_client.get(f"/user/{resources.uuid}")
+    response = flask_client.get(f"/user/{resources.id}")
     # Assert
     # Confirm the user was found.
     assert response.status_code == HTTPStatus.OK

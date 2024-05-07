@@ -1,7 +1,5 @@
 """Handles requests to /users endpoint."""
 
-from typing import Any
-
 import flask_smorest
 from flask import jsonify, views
 from sqlalchemy.exc import SQLAlchemyError
@@ -19,7 +17,7 @@ class UsersEndpoint(views.MethodView):
     """Define the endpoint for /users.
 
     This endpoint is used to create a new user via a POST request.
-    It's separate from UserEndpoint as this endpoint does not accept a UUID.
+    It's separate from UserEndpoint as this endpoint does not accept a id.
     """
 
     @SMOREST_USERS_BLUEPRINT.response(200)
@@ -29,7 +27,7 @@ class UsersEndpoint(views.MethodView):
 
     @SMOREST_USERS_BLUEPRINT.response(201)
     @SMOREST_USERS_BLUEPRINT.arguments(UserSchema)
-    def post(self, data: dict[str, Any]):
+    def post(self, data: dict):
         """Create a new user via a POST request."""
         name = data.get("name")
         email = data.get("email")

@@ -30,9 +30,9 @@ def test_get_user_found(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
     }
     bogus_user: user.User = user.User(**bogus_user_data)
     monkeypatch.setattr(
-        scoping.scoped_session, "get", lambda self, entity, uuid: bogus_user
+        scoping.scoped_session, "get", lambda self, entity, id: bogus_user
     )
-    url = flask.url_for("user.UserEndpoint", uuid="7e557495d9104520a017773b9fc7bd5e")
+    url = flask.url_for("user.UserEndpoint", id="7e557495d9104520a017773b9fc7bd5e")
 
     # ACT
     response = client.get(url)
@@ -42,11 +42,11 @@ def test_get_user_found(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
     assert response.json["email"] == "joebloggs@gmail.com"
 
 
-@pytest.mark.parametrize("invalid_uuid", ["joe_bloggs", " ", 1])
-def test_get_user_not_found(invalid_uuid: Any, client: FlaskClient) -> None:
-    """Test the retrieval of a user with an invalid uuid."""
+@pytest.mark.parametrize("invalid_id", ["joe_bloggs", " ", 1])
+def test_get_user_not_found(invalid_id: Any, client: FlaskClient) -> None:
+    """Test the retrieval of a user with an invalid id."""
     # ARRANGE
-    url = flask.url_for("user.UserEndpoint", uuid=invalid_uuid)
+    url = flask.url_for("user.UserEndpoint", id=invalid_id)
 
     # ACT
     response = client.get(url)
