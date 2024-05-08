@@ -20,7 +20,7 @@ compile:  # Compile the requirements files using pip-tools.
 
 docker:  # Build the docker images.
 	docker build \
-		-t ghcr.io/zengenti/flask-forge-dev:latest \
+		-t ghcr.io/zengenti/flask-forge:latest \
 		-f Dockerfile.dev \
 		.
 	docker build \

@@ -24,6 +24,7 @@ jobs:
         push: true
         tags: |
           zengenti/flask-forge:latest
+          zengenti/flask-forge:${GITHUB_SHA::6}
 
     # - name: Build and Push Development Docker Image
     #   uses: docker/build-push-action@v5
