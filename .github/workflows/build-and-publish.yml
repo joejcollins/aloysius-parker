@@ -16,6 +16,12 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
+    - name: Set short git commit SHA
+      id: vars
+      run: |
+        calculatedSha=$(git rev-parse --short ${{ github.sha }})
+        echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+
     - name: Build and Push Production Docker Image
       uses: docker/build-push-action@v5
       with:
@@ -24,7 +30,7 @@ jobs:
         push: true
         tags: |
           zengenti/flask-forge:latest
-          zengenti/flask-forge:${GITHUB_SHA::6}
+          zengenti/flask-forge:${{ env.COMMIT_SHORT_SHA }}
 
     # - name: Build and Push Development Docker Image
     #   uses: docker/build-push-action@v5
