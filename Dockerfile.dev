@@ -15,3 +15,6 @@ COPY Makefile .
 
 # Build the development virtual environment.
 RUN make venv-dev
+
+# Override the entry point with the shell so you can open the container and take a look.
+ENTRYPOINT ["/bin/bash"]
