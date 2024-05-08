@@ -25,11 +25,11 @@ jobs:
         tags: |
           zengenti/flask-forge:latest
 
-    - name: Build and Push Development Docker Image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: ./Dockerfile.dev
-        push: true
-        tags: |
-          zengenti/flask-forge-dev:latest
+    # - name: Build and Push Development Docker Image
+    #   uses: docker/build-push-action@v5
+    #   with:
+    #     context: .
+    #     file: ./Dockerfile.dev
+    #     push: true
+    #     tags: |
+    #       zengenti/flask-forge-dev:latest
