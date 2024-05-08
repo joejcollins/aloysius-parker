@@ -1,5 +1,5 @@
 # Get ubuntu image with python 3.12 and virtual environment setup
-FROM ghcr.io/zengenti/flask-forge-dev:latest
+FROM python:3.12.3-bullseye
 
 # Set working directory
 WORKDIR /app
