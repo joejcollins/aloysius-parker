@@ -1,9 +1,9 @@
 """User class represents a user in the database."""
 
 import uuid
-from email.utils import parseaddr
 from json import loads
 
+from marshmallow import ValidationError
 from sqlalchemy import Column, String
 
 from flask_forge.database.db import database
@@ -23,12 +23,6 @@ class User(database.Model):
     name: str = Column(String, nullable=False)
     email: str = Column(String, nullable=False)
 
-    MIN_USERNAME_LENGTH: int = 2
-    MAX_USERNAME_LENGTH: int = 16
-    MAX_EMAIL_LENGTH: int = 64
-    ALLOWED_EMAIL_PROVIDER_DOMAINS: set[str] = {"gmail.com", "mail.ru", "outlook.com"}
-    EMAIL_SPLIT_EXPECTED_LENGTH: int = 2
-
     def __init__(self, name: str | None, email: str | None, id: str = None):
         """Create a new User object with a provided name and email."""
         # If an existing ID is provided, validate it
@@ -36,43 +30,7 @@ class User(database.Model):
             try:
                 uuid.UUID(hex=id, version=4)
             except ValueError as e:
-                raise ValueError("Invalid existing user ID") from e
-
-        # Username checking logic
-        if (
-            not name
-            or len(name) < self.MIN_USERNAME_LENGTH
-            or len(name) > self.MAX_USERNAME_LENGTH
-        ):
-            raise ValueError(
-                f"Username must be between {self.MIN_USERNAME_LENGTH} and "
-                f"{self.MAX_USERNAME_LENGTH} characters long"
-            )
-
-        if len(email) > self.MAX_EMAIL_LENGTH:
-            raise ValueError(
-                f"Email must be less than {self.MAX_EMAIL_LENGTH} characters long"
-            )
-
-        # Email checking logic.
-        # parseaddr() return a tuple of (name, email), we only need the email part
-        email: str = parseaddr(email)[1]
-        email_split: list[str] = email.split("@")
-
-        if (
-            len(email_split) != self.EMAIL_SPLIT_EXPECTED_LENGTH
-            or not email_split[0]
-            or not email_split[1]
-        ):
-            raise ValueError("Invalid email address")
-
-        domain: str = email_split[1]
-
-        if domain not in self.ALLOWED_EMAIL_PROVIDER_DOMAINS:
-            raise ValueError(
-                f"Email provider {domain} is not allowed. "
-                f"Only {', '.join(self.ALLOWED_EMAIL_PROVIDER_DOMAINS)} are allowed."
-            )
+                raise ValidationError("Invalid existing user ID") from e
 
         self.id: str = id or uuid.uuid4().hex
         self.name: str = name

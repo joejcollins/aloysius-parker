@@ -35,8 +35,8 @@ class UsersEndpoint(views.MethodView):
         try:
             return users.create_user(name, email)
         except ValueError as e:
-            return jsonify(error=f"user validation error: {e}"), 400
+            return {"error": f"user validation error: {e}"}, 400
         except SQLAlchemyError as e:
-            return jsonify(error=f"database error: {e}"), 500
+            return {"error": f"database error: {e}"}, 500
         except Exception as e:
-            return jsonify(error=f"internal server error: {e}"), 500
+            return {"error": f"internal server error: {e}"}, 500

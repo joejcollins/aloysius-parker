@@ -18,6 +18,7 @@ class SharedResources:
         self.adam = None
         self.eve = None
         self.content: str = "Ate a weird fruit, now I'm feeling a little... ex-posed."
+        self.adam_message_id = None
 
 
 @pytest.fixture(name="resources", scope="module")
@@ -39,7 +40,7 @@ def create_flask_client() -> Generator:
 
 
 def test_001_create_users(
-    flask_client: testing.FlaskClient, resources: SharedResources
+        flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Create the first ever humans in flask-forge-land."""
     # Arrange 2 user accounts
@@ -62,7 +63,7 @@ def test_001_create_users(
 
 
 def test_002_send_message(
-    flask_client: testing.FlaskClient, resources: SharedResources
+        flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Send a message from Adam to Eve."""
     # Arrange
@@ -77,6 +78,7 @@ def test_002_send_message(
 
     # Assert the message was created and that the content is in the response
     assert response.status_code == HTTPStatus.CREATED
+    assert "id" in response.json
     assert resources.content in response.text
 
     # Assert the timestamp of the message is not far off current time
@@ -84,9 +86,23 @@ def test_002_send_message(
     assert "timestamp" in response.json
     assert date_without_time in response.json["timestamp"]
 
+    # Save Adam's last message to delete later
+    resources.adam_message_id = response.json["id"]
 
-def test_003_fetch_messages(
-    flask_client: testing.FlaskClient, resources: SharedResources
+
+def test_003_fetch_messages_bad_limit(
+        flask_client: testing.FlaskClient, resources: SharedResources
+) -> None:
+    """Fetch messages for Eve."""
+    # Try fetch messages with an absurd limit
+    response = flask_client.get(f"/user/{resources.eve.id}/messages?limit=10000")
+
+    # Assert that the request failed
+    assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
+
+
+def test_004_fetch_messages(
+        flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Fetch messages for Eve."""
     # Act
@@ -100,3 +116,22 @@ def test_003_fetch_messages(
 
     # Assert that the content is the same
     assert resources.content == response.json[0]["content"]
+
+
+def test_005_delete_messages(
+        flask_client: testing.FlaskClient, resources: SharedResources
+) -> None:
+    """Delete the messages for Eve."""
+    # Act
+    response = flask_client.delete(f"/user/{resources.eve.id}/messages"
+                                   f"?message_id={resources.adam_message_id}")
+
+    # Assert that the messages were deleted
+    assert response.status_code == HTTPStatus.NO_CONTENT
+
+    # Act
+    response = flask_client.get(f"/user/{resources.eve.id}/messages")
+
+    # Assert that there are no messages
+    assert response.status_code == HTTPStatus.NO_CONTENT
+    assert not response.text
