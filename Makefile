@@ -18,14 +18,13 @@ compile:  # Compile the requirements files using pip-tools.
 	echo "# Add the entire project as a package." >> requirements.dev.txt
 	echo "-e ." >> requirements.dev.txt
 
-docker:  # Build the docker images.
+docker:  # Build the dev image.
 	docker build \
-		-t ghcr.io/zengenti/flask-forge:latest \
+		-t ghcr.io/zengenti/flask-forge-dev:latest \
 		-f Dockerfile.dev \
 		.
-	docker build \
-		--tag ghcr.io/zengenti/flask-forge:`date +"%Y%m%d"` \
-		.
+	echo $$REPO_AND_PACKAGES_TOKEN | docker login ghcr.io -u joejcollins --password-stdin
+	docker push ghcr.io/zengenti/flask-forge-dev:latest
 
 .PHONY: docs  # because there is a directory called docs.
 docs:  # Build the documentation from the comments and documents.
@@ -64,13 +63,7 @@ venv:  # Install the requirements for Python.
 	.venv/bin/python -m pip install --upgrade pip setuptools
 	.venv/bin/python -m pip install -r requirements.txt
 
-venv-dev:  # Install the development requirements for Python. With git hook.
-	python -m venv .venv
-	.venv/bin/python -m pip install --upgrade pip setuptools
-	.venv/bin/python -m pip install -r requirements.dev.txt
-	.venv/bin/pre-commit install
-
-venv-dev-no-git:  # Install the development requirements for Python. Without git hook.
+venv-dev:  # Install the development requirements for Python.
 	python -m venv .venv
 	.venv/bin/python -m pip install --upgrade pip setuptools
 	.venv/bin/python -m pip install -r requirements.dev.txt
