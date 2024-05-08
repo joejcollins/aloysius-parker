@@ -1,7 +1,7 @@
 """Handles requests to /users endpoint."""
 
 import flask_smorest
-from flask import jsonify, views
+from flask import views
 from sqlalchemy.exc import SQLAlchemyError
 
 from flask_forge.handler import users
