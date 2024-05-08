@@ -10,7 +10,7 @@ clean:  # Remove all build, test, coverage and Python artifacts.
 PIPTOOLS_COMPILE = .venv/bin/python -m piptools compile
 
 compile:  # Compile the requirements files using pip-tools.
-	rm -f requirements.*.txt
+	rm -f requirements.*
 	$(PIPTOOLS_COMPILE) --output-file=requirements.txt
 	echo "# Add the entire project as a package." >> requirements.txt
 	echo "-e ." >> requirements.txt
