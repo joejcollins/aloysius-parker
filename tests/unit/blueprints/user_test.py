@@ -33,7 +33,7 @@ def test_get_user_found(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr(
         scoping.scoped_session, "get", lambda self, entity, id: bogus_user
     )
-    url = flask.url_for("user.UserEndpoint", id="7e557495d9104520a017773b9fc7bd5e")
+    url = flask.url_for("user.UserEndpoint", user_id="7e557495d9104520a017773b9fc7bd5e")
     # ACT
     response = client.get(url)
     # ASSERT
@@ -45,7 +45,7 @@ def test_get_user_found(client: FlaskClient, monkeypatch: MonkeyPatch) -> None:
 def test_get_user_not_found(invalid_id: Any, client: FlaskClient) -> None:
     """Test the retrieval of a user with an invalid uuid."""
     # ARRANGE
-    url = flask.url_for("user.UserEndpoint", id=invalid_id)
+    url = flask.url_for("user.UserEndpoint", user_id=invalid_id)
     # ACT
     response = client.get(url)
     # ASSERT
