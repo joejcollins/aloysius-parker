@@ -18,7 +18,7 @@ jobs:
           clean: true
       - name: Symlink to virtual environment in container image
         run: |
-          ln -s .venv/bin/python /app/.venv/bin/python
+          ln -s .venv/bin/python /usr/src/.venv/bin/python
       - name: Run tests.
         env:
           SOURCERY_TOKEN: ${{ secrets.SOURCERY_TOKEN }}
