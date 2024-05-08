@@ -15,8 +15,12 @@ jobs:
       attestations: write
 
     steps:
-    - name: Checkout the repo.
+    - name: Checkout the repo to a depth of 2 so we can see what has changed.
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+        submodules: false
+        clean: true
 
     - name: Docker login
       uses: docker/login-action@v3
@@ -43,8 +47,7 @@ jobs:
 
     - name: Check for changes in requirements.dev.txt
       run: |
-        PREV_COMMIT=$(git log --pretty=format:'%H' -n 1 HEAD^)
-        if git diff --quiet "$PREV_COMMIT" HEAD requirements.dev.txt; then
+        if git diff --quiet HEAD^ HEAD requirements.dev.txt; then
           echo "changed=false" >> $GITHUB_ENV
         else
           echo "changed=true" >> $GITHUB_ENV
