@@ -46,6 +46,7 @@ jobs:
           ghcr.io/zengenti/flask-forge:${{ env.COMMIT_SHORT_SHA }}
 
     - name: Check for changes in requirements.dev.txt
+      id: check_changes
       run: |
         if git diff --quiet HEAD^ HEAD requirements.dev.txt; then
           echo "changed=false" >> $GITHUB_ENV
