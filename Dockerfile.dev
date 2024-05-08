@@ -1,13 +1,13 @@
 # Get ubuntu image with python 3.12 already installed
 FROM python:3.12.3-bullseye
 
-# Setup working directory and copy the project files
-RUN mkdir -p /usr/src/
-WORKDIR /usr/src
+# Set working directory
+WORKDIR /app
+
+# Copy over enough to build the development virtual environment.
 COPY requirements.dev.txt .
 COPY pyproject.toml .
 COPY Makefile .
 
-# Build the development virtual environment
-RUN eval "$(pyenv init -)" \
- && make venv-dev-no-git
+# Build the development virtual environment.
+RUN make venv-dev

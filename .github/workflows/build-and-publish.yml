@@ -41,11 +41,20 @@ jobs:
           ghcr.io/zengenti/flask-forge:latest
           ghcr.io/zengenti/flask-forge:${{ env.COMMIT_SHORT_SHA }}
 
-    # - name: Build and Push Development Docker Image
-    #   uses: docker/build-push-action@v5
-    #   with:
-    #     context: .
-    #     file: ./Dockerfile.dev
-    #     push: true
-    #     tags: |
-    #       zengenti/flask-forge-dev:latest
+    - name: Check for changes in requirements.dev.txt
+      run: |
+        if git diff --quiet HEAD^ HEAD requirements.dev.txt; then
+          echo "changed=false" >> $GITHUB_ENV
+        else
+          echo "changed=true" >> $GITHUB_ENV
+        fi
+
+    - name: Build and Push Development Docker Image
+      if: steps.check_changes.outputs.changed == 'true'
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.dev
+        push: true
+        tags: |
+          zengenti/flask-forge-dev:latest
