@@ -1,4 +1,5 @@
 """Handle functions for /blueprints/users.py."""
+
 from sqlalchemy.exc import SQLAlchemyError
 
 from flask_forge.database.db import database

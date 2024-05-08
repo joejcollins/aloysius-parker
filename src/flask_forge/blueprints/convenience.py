@@ -1,4 +1,5 @@
 """Convenience functions to test the flask application."""
+
 import flask_smorest
 from flask import views
 

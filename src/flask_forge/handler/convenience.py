@@ -1,4 +1,5 @@
 """Handle functions for /blueprints/convenience.py."""
+
 from flask_forge.database.db import database
 from flask_forge.database.user import User
 

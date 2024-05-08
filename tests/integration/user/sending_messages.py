@@ -1,4 +1,5 @@
 """Test message sending functionality."""
+
 from datetime import datetime
 from http import HTTPStatus
 from typing import Generator
@@ -40,7 +41,7 @@ def create_flask_client() -> Generator:
 
 
 def test_001_create_users(
-        flask_client: testing.FlaskClient, resources: SharedResources
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Create the first ever humans in flask-forge-land."""
     # Arrange 2 user accounts
@@ -63,7 +64,7 @@ def test_001_create_users(
 
 
 def test_002_send_message(
-        flask_client: testing.FlaskClient, resources: SharedResources
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Send a message from Adam to Eve."""
     # Arrange
@@ -91,7 +92,7 @@ def test_002_send_message(
 
 
 def test_003_fetch_messages_bad_limit(
-        flask_client: testing.FlaskClient, resources: SharedResources
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Fetch messages for Eve."""
     # Try fetch messages with an absurd limit
@@ -102,7 +103,7 @@ def test_003_fetch_messages_bad_limit(
 
 
 def test_004_fetch_messages(
-        flask_client: testing.FlaskClient, resources: SharedResources
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Fetch messages for Eve."""
     # Act
@@ -119,12 +120,13 @@ def test_004_fetch_messages(
 
 
 def test_005_delete_messages(
-        flask_client: testing.FlaskClient, resources: SharedResources
+    flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
     """Delete the messages for Eve."""
     # Act
-    response = flask_client.delete(f"/user/{resources.eve.id}/messages"
-                                   f"?message_id={resources.adam_message_id}")
+    response = flask_client.delete(
+        f"/user/{resources.eve.id}/messages" f"?message_id={resources.adam_message_id}"
+    )
 
     # Assert that the messages were deleted
     assert response.status_code == HTTPStatus.NO_CONTENT

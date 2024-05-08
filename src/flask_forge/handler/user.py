@@ -79,9 +79,11 @@ def send_user_message(author_id: str, recipient_id: str, content: str):
 def delete_user_message(recipient_id: str, args: dict):
     """Delete a message sent to the recipient with the provided message ID."""
     message_id: str = args.get("message_id")
-    if (message := database.session.query(Message)
-            .filter_by(id=message_id, recipient_id=recipient_id)
-            .first()):
+    if (
+        message := database.session.query(Message)
+        .filter_by(id=message_id, recipient_id=recipient_id)
+        .first()
+    ):
         database.session.delete(message)
         database.session.commit()
         return "", 204

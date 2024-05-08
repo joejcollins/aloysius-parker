@@ -1,4 +1,5 @@
 """Defines the HTTP request schema for classes so that Swagger has more context."""
+
 import re
 from email.utils import parseaddr
 
@@ -26,9 +27,9 @@ class UserSchema(Schema):
     def validate_name(self, value):
         """Ensure name is valid."""
         if (
-                not value
-                or len(value) < self._MIN_USERNAME_LENGTH
-                or len(value) > self._MAX_USERNAME_LENGTH
+            not value
+            or len(value) < self._MIN_USERNAME_LENGTH
+            or len(value) > self._MAX_USERNAME_LENGTH
         ):
             raise ValidationError(
                 f"Username must be between {self._MIN_USERNAME_LENGTH} and "
