@@ -17,12 +17,12 @@ class Message(database.Model):
     and the recipient. It also contains a timestamp noting when it was sent.
     """
 
-    __tablename__ = 'messages'
+    __tablename__ = "messages"
 
     id: Column[String] = Column(String, primary_key=True)
     content: Column[String] = Column(String(MAX_MESSAGE_LENGTH), nullable=False)
-    author_id: Column[String] = Column(String, ForeignKey('users.id'))
-    recipient_id: Column[String] = Column(String, ForeignKey('users.id'))
+    author_id: Column[String] = Column(String, ForeignKey("users.id"))
+    recipient_id: Column[String] = Column(String, ForeignKey("users.id"))
     timestamp: Column[DateTime] = Column(DateTime, default=datetime.utcnow)
 
     def __init__(self, author_id: str, recipient_id: str, message: str):

@@ -39,9 +39,9 @@ class User(database.Model):
 
         # Username checking logic
         if (
-                not name
-                or len(name) < self.MIN_USERNAME_LENGTH
-                or len(name) > self.MAX_USERNAME_LENGTH
+            not name
+            or len(name) < self.MIN_USERNAME_LENGTH
+            or len(name) > self.MAX_USERNAME_LENGTH
         ):
             raise ValueError(
                 f"Username must be between {self.MIN_USERNAME_LENGTH} and "
@@ -59,9 +59,9 @@ class User(database.Model):
         email_split: list[str] = email.split("@")
 
         if (
-                len(email_split) != self.EMAIL_SPLIT_EXPECTED_LENGTH
-                or not email_split[0]
-                or not email_split[1]
+            len(email_split) != self.EMAIL_SPLIT_EXPECTED_LENGTH
+            or not email_split[0]
+            or not email_split[1]
         ):
             raise ValueError("Invalid email address")
 
@@ -78,12 +78,12 @@ class User(database.Model):
         self.email: str = email
 
     @classmethod
-    def from_json(cls, json_str) -> 'User':
+    def from_json(cls, json_str) -> "User":
         """Create a new User object from a JSON string."""
         json_dict = loads(json_str)
         return cls(**json_dict)
 
-    def send_message(self, recipient: 'User', message: str):
+    def send_message(self, recipient: "User", message: str):
         """Send a message to another user."""
         message = Message(self, recipient, message)
 

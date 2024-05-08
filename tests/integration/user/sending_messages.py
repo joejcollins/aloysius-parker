@@ -38,8 +38,9 @@ def create_flask_client() -> Generator:
 # endregion
 
 
-def test_001_create_users(flask_client: testing.FlaskClient,
-                          resources: SharedResources) -> None:
+def test_001_create_users(
+    flask_client: testing.FlaskClient, resources: SharedResources
+) -> None:
     """Create the first ever humans in flask-forge-land."""
     # Arrange 2 user accounts
     data_user_1 = {"name": "Adam", "email": "adam@gmail.com"}
@@ -60,8 +61,9 @@ def test_001_create_users(flask_client: testing.FlaskClient,
             resources.eve = User.from_json(response.text)
 
 
-def test_002_send_message(flask_client: testing.FlaskClient,
-                          resources: SharedResources) -> None:
+def test_002_send_message(
+    flask_client: testing.FlaskClient, resources: SharedResources
+) -> None:
     """Send a message from Adam to Eve."""
     # Arrange
 
@@ -71,9 +73,7 @@ def test_002_send_message(flask_client: testing.FlaskClient,
     }
 
     # Act
-    response = flask_client.post(
-        f"/user/{resources.eve.id}/messages", json=message
-    )
+    response = flask_client.post(f"/user/{resources.eve.id}/messages", json=message)
 
     # Assert the message was created and that the content is in the response
     assert response.status_code == HTTPStatus.CREATED
@@ -85,8 +85,9 @@ def test_002_send_message(flask_client: testing.FlaskClient,
     assert date_without_time in response.json["timestamp"]
 
 
-def test_003_fetch_messages(flask_client: testing.FlaskClient,
-                            resources: SharedResources) -> None:
+def test_003_fetch_messages(
+    flask_client: testing.FlaskClient, resources: SharedResources
+) -> None:
     """Fetch messages for Eve."""
     # Act
     response = flask_client.get(f"/user/{resources.eve.id}/messages")

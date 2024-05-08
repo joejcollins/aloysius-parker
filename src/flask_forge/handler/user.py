@@ -49,9 +49,7 @@ def send_user_message(author_id: str, recipient_id: str, content: str):
 
     try:
         message = Message(
-            author_id=author.id,
-            recipient_id=recipient.id,
-            message=content
+            author_id=author.id, recipient_id=recipient.id, message=content
         )
     except ValueError as e:
         return {"error": e}, 400
