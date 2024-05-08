@@ -9,7 +9,7 @@ jobs:
   run_python_tests:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/zengenti/flask-forge-dev:latest
+      image: ghcr.io/zengenti/flask-forge:latest
     steps:
       - name: Checkout the repo.
         uses: actions/checkout@v4
