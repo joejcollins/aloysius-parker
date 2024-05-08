@@ -1,13 +1,12 @@
 {
 	"name": "Python 3",
-	"image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
+	"image": "ghcr.io/zengenti/flask-forge-dev:latest",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers-contrib/features/starship:1": {}
 	},
     "forwardPorts": [
-        8000,
-        8080
+        5000
     ],
     "postCreateCommand": ". ./.devcontainer/post-create.sh  > ../post-create-log.txt",
     "customizations": {
