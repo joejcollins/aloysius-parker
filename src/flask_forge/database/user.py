@@ -1,4 +1,5 @@
 """User class represents a user in the database."""
+
 import uuid
 from email.utils import parseaddr
 from json import loads
@@ -34,8 +35,8 @@ class User(database.Model):
         if id:
             try:
                 uuid.UUID(hex=id, version=4)
-            except ValueError:
-                raise ValueError("Invalid existing user ID")
+            except ValueError as e:
+                raise ValueError("Invalid existing user ID") from e
 
         # Username checking logic
         if (
