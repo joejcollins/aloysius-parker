@@ -2,7 +2,6 @@
 
 import flask_smorest
 from flask import views
-from sqlalchemy.exc import SQLAlchemyError
 
 from flask_forge.handler import users
 from flask_forge.models.user import UserSchema
@@ -29,14 +28,4 @@ class UsersEndpoint(views.MethodView):
     @SMOREST_USERS_BLUEPRINT.arguments(UserSchema)
     def post(self, data: dict):
         """Create a new user via a POST request."""
-        name = data.get("name")
-        email = data.get("email")
-
-        try:
-            return users.create_user(name, email)
-        except ValueError as e:
-            return {"error": f"user validation error: {e}"}, 400
-        except SQLAlchemyError as e:
-            return {"error": f"database error: {e}"}, 500
-        except Exception as e:
-            return {"error": f"internal server error: {e}"}, 500
+        return users.create_user(data)

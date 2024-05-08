@@ -1,4 +1,6 @@
 """Handle functions for /blueprints/users.py."""
+from sqlalchemy.exc import SQLAlchemyError
+
 from flask_forge.database.db import database
 from flask_forge.database.user import User
 
@@ -11,10 +13,21 @@ def get_users():
     return "", 204
 
 
-def create_user(name: str, email: str):
+def create_user(data: dict):
     """Create a new user."""
-    user = User(name, email)
-    with database.session.begin():
-        database.session.add(user)
+    name: str = data.get("name")
+    email: str = data.get("email")
+
+    try:
+        user: User = User(name, email)
+    except ValueError as e:
+        return {"error": f"user validation error: {e}"}, 400
+    except SQLAlchemyError as e:
+        return {"error": f"database error: {e}"}, 500
+    except Exception as e:
+        return {"error": f"internal server error: {e}"}, 500
+    else:
+        with database.session.begin():
+            database.session.add(user)
 
     return user.to_json()
