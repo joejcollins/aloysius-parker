@@ -1,5 +1,6 @@
 """Message class representing a message in the database."""
-from datetime import datetime
+
+from datetime import datetime, timezone
 from uuid import uuid4
 
 from sqlalchemy import Column, DateTime, ForeignKey, String
@@ -34,7 +35,7 @@ class Message(database.Model):
         self.author_id: str = author_id
         self.recipient_id: str = recipient_id
         self.content: str = message
-        self.timestamp: datetime = datetime.utcnow()
+        self.timestamp: datetime = datetime.now(timezone.utc)
 
     author = relationship("User", foreign_keys=[author_id])
     recipient = relationship("User", foreign_keys=[recipient_id])
