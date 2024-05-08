@@ -96,7 +96,6 @@ def test_003_fetch_messages(
     assert len(response.json) == 1
 
     # Assert that it's from Adam
-    print(response.json)
     assert response.json[0]["author_id"] == resources.adam.id
 
     # Assert that the content is the same
