@@ -4,6 +4,8 @@
 #
 #    pip-compile --allow-unsafe --extra=dev --output-file=requirements.dev.txt
 #
+alabaster==0.7.16
+    # via sphinx
 anyio==4.3.0
     # via
     #   starlette
