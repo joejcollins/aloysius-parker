@@ -41,7 +41,6 @@ dev = [
     "sphinx",
     "sphinx-autobuild",
     "sphinx-rtd-theme",
-    "sphinxcontrib-mermaid",
 ]
 
 [project.scripts]
