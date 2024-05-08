@@ -1,4 +1,4 @@
-name: Build Docker image and push to Dockerhub
+name: Build Docker image and push to the Github Container Registry
 
 on:
   push:
@@ -25,9 +25,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-
     - name: Set short git commit SHA
       id: vars
       run: |
@@ -41,8 +38,8 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          zengenti/flask-forge:latest
-          zengenti/flask-forge:${{ env.COMMIT_SHORT_SHA }}
+          ghcr.io/zengenti/flask-forge:latest
+          ghcr.io/zengenti/flask-forge:${{ env.COMMIT_SHORT_SHA }}
 
     # - name: Build and Push Development Docker Image
     #   uses: docker/build-push-action@v5
