@@ -1,7 +1,7 @@
 """Handle requests to /user/ endpoint."""
 
 import flask_smorest
-from flask import views
+from flask import request, views
 
 from flask_forge.handler import user
 from flask_forge.models.message import MessageSchema
@@ -53,6 +53,9 @@ class UserMessagesEndpoint(views.MethodView):
 
     This endpoint is used to retrieve all messages for a user and send a new message.
     """
+
+    GET_MESSAGES_MIN_LIMIT: int = 1
+    GET_MESSAGES_MAX_LIMIT: int = 100
 
     # TODO: Add history/limit parameter to fetch only the last N messages
     @SMOREST_USER_BLUEPRINT.response(200)
