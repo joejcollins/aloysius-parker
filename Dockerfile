@@ -1,5 +1,6 @@
 # Get ubuntu image with python 3.12 and set up the application.
-FROM mcr.microsoft.com/devcontainers/python:1-3.12-bullseye
+# FROM mcr.microsoft.com/devcontainers/python:1-3.12-bullseye
+FROM python:3.12.3-bullseye
 
 # Set working directory
 WORKDIR /app
