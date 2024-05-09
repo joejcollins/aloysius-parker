@@ -115,3 +115,40 @@ def test_004_check_that_there_is_only_one_user(
     # Confirm that the user data matches the data we added.
     first_user: dict[str, str] = response.json[0]
     assert is_user_same(first_user, resources)
+
+
+def test_005_try_edit_user(
+    flask_client: testing.FlaskClient, resources: SharedResources
+) -> None:
+    """Fetch all users, try edit one, and confirm the edit."""
+    # Act; fetch users
+    response = flask_client.get("/users")
+
+    # Assert there's more than 0 users
+    assert response.status_code == HTTPStatus.OK
+
+    # Arrange new data
+    new_data: dict = {"name": "New name", "email": "new_email@gmail.com"}
+
+    # Act; loop over users and edit the first one
+    for user in response.json:
+        response = flask_client.patch(f"/user/{user.get('id')}", json=new_data)
+        assert response.status_code == HTTPStatus.OK
+        assert not is_user_same(response.json, resources)
+        break
+
+
+def test_006_try_delete_user(
+    flask_client: testing.FlaskClient, resources: SharedResources
+) -> None:
+    """Fetch all users, then delete them all."""
+    # Act; fetch users
+    response = flask_client.get("/users")
+
+    # Assert there's more than 0 users
+    assert response.status_code == HTTPStatus.OK
+
+    # Act; loop over users and delete them
+    for user in response.json:
+        response = flask_client.delete(f"/user/{user.get('id')}")
+        assert response.status_code == HTTPStatus.NO_CONTENT

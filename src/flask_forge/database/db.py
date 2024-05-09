@@ -2,4 +2,4 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
-database = SQLAlchemy()
+database: SQLAlchemy = SQLAlchemy()

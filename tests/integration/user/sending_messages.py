@@ -75,6 +75,8 @@ def test_002_send_message(
     }
 
     # Act
+    # >       raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+    # E       TypeError: Object of type Message is not JSON serializable
     response = flask_client.post(f"/user/{resources.eve.id}/messages", json=message)
 
     # Assert the message was created and that the content is in the response

@@ -27,7 +27,7 @@ class Message(database.Model):
     recipient_id: Column[String] = Column(String, ForeignKey("users.id"))
     timestamp: Column[DateTime] = Column(DateTime, default=datetime.utcnow)
 
-    def __init__(self, author_id: str, recipient_id: str, message: str):
+    def __init__(self, author_id: str, recipient_id: str, content: str):
         """Create a new Message object."""
         if author_id == recipient_id:
             raise ValidationError("Find some friends.")
@@ -35,7 +35,7 @@ class Message(database.Model):
         self.id: str = uuid4().hex
         self.author_id: str = author_id
         self.recipient_id: str = recipient_id
-        self.content: str = message
+        self.content: str = content
         self.timestamp: datetime = datetime.now(timezone.utc)
 
     author = relationship("User", foreign_keys=[author_id])

@@ -37,10 +37,13 @@ class User(database.Model):
         self.email: str = email
 
     @classmethod
-    def from_json(cls, json_str) -> "User":
+    def from_json(cls, data) -> "User":
         """Create a new User object from a JSON string."""
-        json_dict = loads(json_str)
-        return cls(**json_dict)
+        # If the data is already a dictionary, use it as-is
+        if isinstance(data, str):
+            data = loads(data)
+
+        return cls(**data)
 
     def send_message(self, recipient: "User", message: str):
         """Send a message to another user."""

@@ -3,7 +3,7 @@
 import re
 from email.utils import parseaddr
 
-from marshmallow import Schema, ValidationError, fields, validates
+from marshmallow import Schema, ValidationError, fields, validates, validates_schema
 
 
 class UserSchema(Schema):
@@ -68,6 +68,12 @@ class UserPatchSchema(UserSchema):
     email = fields.String(
         required=False, metadata={"description": "The email of the user"}
     )
+
+    @validates_schema
+    def validate_name_or_email_present(self, data, **kwargs):
+        """Ensure either name or email is present."""
+        if "name" not in data and "email" not in data:
+            raise ValidationError("Either name or email must be present")
 
     @validates("name")
     def validate_name(self, value):
