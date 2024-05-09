@@ -23,6 +23,8 @@ jobs:
         env:
           SOURCERY_TOKEN: ${{ secrets.SOURCERY_TOKEN }}
         run: |
+          pwd
+          ls -lah
           make report
           make lint
           make test
