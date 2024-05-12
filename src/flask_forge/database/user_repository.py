@@ -52,7 +52,7 @@ class UserRepository:
         "limit" specifies the maximum number of messages to return.
         """
         query: Result = (
-            database.session.query(Message)
+            self.db.session.query(Message)
             .filter(Message.recipient_id == user_id)
             .limit(limit)
         )
@@ -67,3 +67,16 @@ class UserRepository:
         self.db.session.add(message)
         self.db.session.commit()
         return message
+
+    def delete_user_message(self, recipient_id: str, message_id: str) -> bool:
+        """Delete a message sent to the recipient with the provided message ID."""
+        if (
+            message := self.db.session.query(Message)
+            .filter_by(id=message_id, recipient_id=recipient_id)
+            .first()
+        ):
+            self.db.session.delete(message)
+            self.db.session.commit()
+            return True
+
+        return False
