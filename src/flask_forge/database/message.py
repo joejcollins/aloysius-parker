@@ -3,7 +3,6 @@
 from datetime import datetime, timezone
 from uuid import uuid4
 
-from marshmallow import ValidationError
 from sqlalchemy import Column, DateTime, ForeignKey, String
 from sqlalchemy.orm import relationship
 
@@ -29,9 +28,6 @@ class Message(database.Model):
 
     def __init__(self, author_id: str, recipient_id: str, content: str):
         """Create a new Message object."""
-        if author_id == recipient_id:
-            raise ValidationError("Find some friends.")
-
         self.id: str = uuid4().hex
         self.author_id: str = author_id
         self.recipient_id: str = recipient_id
