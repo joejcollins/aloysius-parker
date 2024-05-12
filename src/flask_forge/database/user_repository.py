@@ -1,7 +1,8 @@
+"""Handles database logic, separating it from the handler functions."""
+
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Result
 
-from flask_forge.database.db import database
 from flask_forge.database.message import Message
 from flask_forge.database.user import User
 
