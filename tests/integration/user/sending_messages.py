@@ -74,9 +74,6 @@ def test_002_send_message(
         "content": resources.content,
     }
 
-    # Act
-    # >       raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
-    # E       TypeError: Object of type Message is not JSON serializable
     response = flask_client.post(f"/user/{resources.eve.id}/messages", json=message)
 
     # Assert the message was created and that the content is in the response
@@ -139,3 +136,23 @@ def test_005_delete_messages(
     # Assert that there are no messages
     assert response.status_code == HTTPStatus.NO_CONTENT
     assert not response.text
+
+
+def test_006_lonely_message(
+    flask_client: testing.FlaskClient, resources: SharedResources
+) -> None:
+    """Adam messages himself. Unsuccessfully."""
+    # Arrange
+    message: dict[str, str] = {
+        "author_id": resources.adam.id,
+        "content": "Only snakes around here.",
+    }
+
+    # Act; Adam messages himself
+    response = flask_client.post(f"/user/{resources.adam.id}/messages", json=message)
+
+    # Assert that the message was not created
+    assert response.status_code == HTTPStatus.UPGRADE_REQUIRED
+
+    # Assert that the response suggests Adam to find more friends
+    assert "find some friends" in response.text.lower()
