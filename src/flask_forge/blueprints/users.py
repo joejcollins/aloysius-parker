@@ -1,5 +1,7 @@
 """Handles requests to /users endpoint."""
 
+from http import HTTPStatus
+
 import flask_smorest
 from flask import views
 
@@ -24,7 +26,7 @@ class UsersEndpoint(views.MethodView):
         """Retrieve all users."""
         return users.get_users()
 
-    @SMOREST_USERS_BLUEPRINT.response(201)
+    @SMOREST_USERS_BLUEPRINT.response(HTTPStatus.CREATED)
     @SMOREST_USERS_BLUEPRINT.arguments(UserSchema)
     def post(self, data: dict):
         """Create a new user via a POST request."""

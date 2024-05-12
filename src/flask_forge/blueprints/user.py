@@ -1,5 +1,7 @@
 """Handle requests to /user/ endpoint."""
 
+from http import HTTPStatus
+
 import flask_smorest
 from flask import views
 
@@ -23,17 +25,17 @@ class UserEndpoint(views.MethodView):
     This endpoint is used to retrieve and delete an existing user.
     """
 
-    @SMOREST_USER_BLUEPRINT.response(200)
+    @SMOREST_USER_BLUEPRINT.response(HTTPStatus.OK)
     def get(self, user_id: str):
         """Retrieve user information based on id."""
         return user.fetch_user(user_id)
 
-    @SMOREST_USER_BLUEPRINT.response(204)
+    @SMOREST_USER_BLUEPRINT.response(HTTPStatus.NO_CONTENT)
     def delete(self, user_id: str):
         """Delete an existing user based on id."""
         return user.delete_user(user_id)
 
-    @SMOREST_USER_BLUEPRINT.response(200)
+    @SMOREST_USER_BLUEPRINT.response(HTTPStatus.OK)
     @SMOREST_USER_BLUEPRINT.arguments(UserPatchSchema)
     def patch(self, data: dict, user_id: str):
         """Update an existing user based on id."""
@@ -54,13 +56,13 @@ class UserMessagesEndpoint(views.MethodView):
         return user.get_user_messages(user_id, args)
 
     # todo: consider specifying location="json" for each blueprint arg
-    @SMOREST_USER_BLUEPRINT.response(201)
+    @SMOREST_USER_BLUEPRINT.response(HTTPStatus.CREATED)
     @SMOREST_USER_BLUEPRINT.arguments(PostMessageSchema)
     def post(self, data: dict, user_id: str):
         """POST a new message to an existing user."""
         return user.send_user_message(data["author_id"], user_id, data["content"])
 
-    @SMOREST_USER_BLUEPRINT.response(204)
+    @SMOREST_USER_BLUEPRINT.response(HTTPStatus.NO_CONTENT)
     @SMOREST_USER_BLUEPRINT.arguments(DeleteMessageSchemaArguments, location="query")
     def delete(self, args: dict, user_id: str):
         """Delete a message for a user."""
