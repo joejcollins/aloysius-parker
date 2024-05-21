@@ -18,6 +18,7 @@ classifiers = [
 ]
 dependencies = [
     "flask",
+    "flask-cors",
     "flask_smorest",
     "gunicorn",
     "prometheus-flask-exporter",

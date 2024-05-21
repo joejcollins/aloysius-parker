@@ -12,16 +12,17 @@ click==8.1.7
     # via flask
 flask==3.0.3
     # via
+    #   flask-cors
     #   flask-smorest
     #   flask-sqlalchemy
     #   flask_forge (pyproject.toml)
     #   prometheus-flask-exporter
+flask-cors==4.0.1
+    # via flask_forge (pyproject.toml)
 flask-smorest==0.44.0
     # via flask_forge (pyproject.toml)
 flask-sqlalchemy==3.1.1
     # via flask_forge (pyproject.toml)
-greenlet==3.0.3
-    # via sqlalchemy
 gunicorn==22.0.0
     # via flask_forge (pyproject.toml)
 itsdangerous==2.2.0
