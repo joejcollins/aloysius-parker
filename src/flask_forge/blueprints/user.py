@@ -2,6 +2,7 @@
 
 from http import HTTPStatus
 
+import flask_cors
 import flask_smorest
 from flask import views
 
@@ -16,6 +17,7 @@ from flask_forge.models.user import UserPatchSchema
 SMOREST_USER_BLUEPRINT = flask_smorest.Blueprint(
     "user", __name__, description="Management of individual users."
 )
+flask_cors.CORS(SMOREST_USER_BLUEPRINT)
 
 
 @SMOREST_USER_BLUEPRINT.route("/user/<string:user_id>")
