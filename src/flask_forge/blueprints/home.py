@@ -3,12 +3,16 @@
 from datetime import datetime
 
 import flask
+import flask_cors
 
 START_TIME: datetime = datetime.now()
 BLUEPRINT = flask.Blueprint("home", __name__)
+flask_cors.CORS(
+    BLUEPRINT, allow_headers=["X-Security-Token", "Content-Type"]
+)  # to allow for cross domain requests
 
 
-@BLUEPRINT.route("/")
+@BLUEPRINT.route("/", methods=["GET"])
 def home():
     """Return a JSON response with the name of the app, endpoints, and the uptime."""
     the_app = flask.current_app
