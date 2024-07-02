@@ -42,8 +42,8 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          ghcr.io/zengenti/aloysius-parker:latest
-          ghcr.io/zengenti/aloysius-parker:${{ env.COMMIT_SHORT_SHA }}
+          ghcr.io/joejcollins/aloysius-parker:latest
+          ghcr.io/joejcollins/aloysius-parker:${{ env.COMMIT_SHORT_SHA }}
 
     - name: Check for changes in requirements.dev.txt
       id: check_changes
@@ -61,4 +61,4 @@ jobs:
         file: ./Dockerfile.dev
         push: true
         tags: |
-          ghcr.io/zengenti/aloysius-parker-dev:latest
+          ghcr.io/joejcollins/aloysius-parker-dev:latest

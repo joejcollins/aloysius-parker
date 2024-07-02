@@ -20,11 +20,11 @@ compile:  # Compile the requirements files using pip-tools.
 
 docker:  # Build the dev image.
 	docker build \
-		-t ghcr.io/zengenti/aloysius-parker-dev:latest \
+		-t ghcr.io/joejcollins/aloysius-parker-dev:latest \
 		-f Dockerfile.dev \
 		.
 	echo $$REPO_AND_PACKAGES_TOKEN | docker login ghcr.io -u joejcollins --password-stdin
-	docker push ghcr.io/zengenti/aloysius-parker-dev:latest
+	docker push ghcr.io/joejcollins/aloysius-parker-dev:latest
 
 .PHONY: docs  # because there is a directory called docs.
 docs:  # Build the documentation from the comments and documents.

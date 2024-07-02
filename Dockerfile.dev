@@ -1,5 +1,5 @@
 # Get ubuntu image with python 3.12 already installed
-FROM ghcr.io/zengenti/aloysius-parker:latest
+FROM ghcr.io/joejcollins/aloysius-parker:latest
 
 # Set working directory
 RUN mkdir -p /usr/src/

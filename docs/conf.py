@@ -7,8 +7,8 @@ import sys
 sys.path.insert(0, os.path.abspath("../"))
 
 # Project information
-project = "Flask Forge"
-copyright = "2024, Zengenti Limited"
+project = "Aloysius Parker"
+copyright = "2024, Joe J Collins"
 author = "j.collins"
 release = "1"
 

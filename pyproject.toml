@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "aloysius_parker"
 version = "0.1.0"
 authors = [
-  { name="Joe Collins", email="j.collins@zengenti.com" },
+  { name="Joe Collins", email="joejcollins@gmail.com" },
 ]
 description = "."
 readme = "README.md"

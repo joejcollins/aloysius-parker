@@ -24,7 +24,6 @@
         "Udemy",
         "venv",
         "werkzeug",
-        "wsgi",
-        "Zengenti"
+        "wsgi"
     ]
 }

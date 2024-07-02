@@ -1,6 +1,6 @@
 {
 	"name": "Python 3.12",
-	"image": "ghcr.io/zengenti/aloysius-parker-dev:latest",
+	"image": "ghcr.io/joejcollins/aloysius-parker-dev:latest",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers-contrib/features/starship:1": {}
