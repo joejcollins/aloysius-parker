@@ -1,4 +1,4 @@
-flask\_forge.models package
+aloysius\_parker.models package
 ===========================
 
 Module contents

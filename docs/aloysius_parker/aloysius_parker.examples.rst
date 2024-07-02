@@ -1,4 +1,4 @@
-flask\_forge.examples package
+aloysius\_parker.examples package
 =============================
 
 Subpackages

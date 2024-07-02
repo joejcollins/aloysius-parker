@@ -1,10 +1,10 @@
-flask\_forge.examples.simple\_user\_database package
+aloysius\_parker.examples.simple\_user\_database package
 ====================================================
 
 Submodules
 ----------
 
-flask\_forge.examples.simple\_user\_database.app module
+aloysius\_parker.examples.simple\_user\_database.app module
 -------------------------------------------------------
 
 .. automodule:: aloysius_parker.examples.simple_user_database.app
@@ -12,7 +12,7 @@ flask\_forge.examples.simple\_user\_database.app module
    :undoc-members:
    :show-inheritance:
 
-flask\_forge.examples.simple\_user\_database.db module
+aloysius\_parker.examples.simple\_user\_database.db module
 ------------------------------------------------------
 
 .. automodule:: aloysius_parker.examples.simple_user_database.db
@@ -20,7 +20,7 @@ flask\_forge.examples.simple\_user\_database.db module
    :undoc-members:
    :show-inheritance:
 
-flask\_forge.examples.simple\_user\_database.user module
+aloysius\_parker.examples.simple\_user\_database.user module
 --------------------------------------------------------
 
 .. automodule:: aloysius_parker.examples.simple_user_database.user

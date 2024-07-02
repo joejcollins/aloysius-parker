@@ -1,10 +1,10 @@
-flask\_forge.cli package
+aloysius\_parker.cli package
 ========================
 
 Submodules
 ----------
 
-flask\_forge.cli.main module
+aloysius\_parker.cli.main module
 ----------------------------
 
 .. automodule:: aloysius_parker.cli.main

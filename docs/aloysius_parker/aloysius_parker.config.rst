@@ -1,10 +1,10 @@
-flask\_forge.config package
+aloysius\_parker.config package
 ===========================
 
 Submodules
 ----------
 
-flask\_forge.config.monitoring module
+aloysius\_parker.config.monitoring module
 -------------------------------------
 
 .. automodule:: aloysius_parker.config.monitoring

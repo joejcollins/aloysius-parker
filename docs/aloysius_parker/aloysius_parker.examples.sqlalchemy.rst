@@ -1,4 +1,4 @@
-flask\_forge.examples.sqlalchemy package
+aloysius\_parker.examples.sqlalchemy package
 ========================================
 
 Subpackages
@@ -12,7 +12,7 @@ Subpackages
 Submodules
 ----------
 
-flask\_forge.examples.sqlalchemy.app module
+aloysius\_parker.examples.sqlalchemy.app module
 -------------------------------------------
 
 .. automodule:: aloysius_parker.examples.sqlalchemy.app
@@ -20,7 +20,7 @@ flask\_forge.examples.sqlalchemy.app module
    :undoc-members:
    :show-inheritance:
 
-flask\_forge.examples.sqlalchemy.db module
+aloysius\_parker.examples.sqlalchemy.db module
 ------------------------------------------
 
 .. automodule:: aloysius_parker.examples.sqlalchemy.db
@@ -28,7 +28,7 @@ flask\_forge.examples.sqlalchemy.db module
    :undoc-members:
    :show-inheritance:
 
-flask\_forge.examples.sqlalchemy.errors module
+aloysius\_parker.examples.sqlalchemy.errors module
 ----------------------------------------------
 
 .. automodule:: aloysius_parker.examples.sqlalchemy.errors
@@ -36,7 +36,7 @@ flask\_forge.examples.sqlalchemy.errors module
    :undoc-members:
    :show-inheritance:
 
-flask\_forge.examples.sqlalchemy.schemas module
+aloysius\_parker.examples.sqlalchemy.schemas module
 -----------------------------------------------
 
 .. automodule:: aloysius_parker.examples.sqlalchemy.schemas
@@ -44,7 +44,7 @@ flask\_forge.examples.sqlalchemy.schemas module
    :undoc-members:
    :show-inheritance:
 
-flask\_forge.examples.sqlalchemy.user module
+aloysius\_parker.examples.sqlalchemy.user module
 --------------------------------------------
 
 .. automodule:: aloysius_parker.examples.sqlalchemy.user

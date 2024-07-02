@@ -1,4 +1,4 @@
-flask\_forge package
+aloysius\_parker package
 ====================
 
 Subpackages
@@ -15,7 +15,7 @@ Subpackages
 Submodules
 ----------
 
-flask\_forge.main module
+aloysius\_parker.main module
 ------------------------
 
 .. automodule:: aloysius_parker.main

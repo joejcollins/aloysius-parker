@@ -1,10 +1,10 @@
-flask\_forge.examples.blueprints package
+aloysius\_parker.examples.blueprints package
 ========================================
 
 Submodules
 ----------
 
-flask\_forge.examples.blueprints.app module
+aloysius\_parker.examples.blueprints.app module
 -------------------------------------------
 
 .. automodule:: aloysius_parker.examples.blueprints.app
@@ -12,7 +12,7 @@ flask\_forge.examples.blueprints.app module
    :undoc-members:
    :show-inheritance:
 
-flask\_forge.examples.blueprints.db module
+aloysius\_parker.examples.blueprints.db module
 ------------------------------------------
 
 .. automodule:: aloysius_parker.examples.blueprints.db
@@ -20,7 +20,7 @@ flask\_forge.examples.blueprints.db module
    :undoc-members:
    :show-inheritance:
 
-flask\_forge.examples.blueprints.errors module
+aloysius\_parker.examples.blueprints.errors module
 ----------------------------------------------
 
 .. automodule:: aloysius_parker.examples.blueprints.errors
@@ -28,7 +28,7 @@ flask\_forge.examples.blueprints.errors module
    :undoc-members:
    :show-inheritance:
 
-flask\_forge.examples.blueprints.user module
+aloysius\_parker.examples.blueprints.user module
 --------------------------------------------
 
 .. automodule:: aloysius_parker.examples.blueprints.user

@@ -1,10 +1,10 @@
-flask\_forge package
+aloysius\_parker package
 ====================
 
 Submodules
 ----------
 
-flask\_forge.dummy module
+aloysius\_parker.dummy module
 -------------------------
 
 .. automodule:: aloysius_parker.dummy

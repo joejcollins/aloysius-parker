@@ -1,10 +1,10 @@
-flask\_forge.examples.sqlalchemy.models package
+aloysius\_parker.examples.sqlalchemy.models package
 ===============================================
 
 Submodules
 ----------
 
-flask\_forge.examples.sqlalchemy.models.user module
+aloysius\_parker.examples.sqlalchemy.models.user module
 ---------------------------------------------------
 
 .. automodule:: aloysius_parker.examples.sqlalchemy.models.user
