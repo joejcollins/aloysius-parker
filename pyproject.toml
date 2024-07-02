@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "flask_forge"
+name = "aloysius_parker"
 version = "0.1.0"
 authors = [
   { name="Joe Collins", email="j.collins@zengenti.com" },
@@ -46,7 +46,7 @@ dev = [
 ]
 
 [project.scripts]
-run = "flask_forge.main:run"
+run = "aloysius_parker.main:run"
 
 [tool.black]
 line-length = 88
