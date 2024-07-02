@@ -1,5 +1,8 @@
 """Handles database logic, separating it from the handler functions."""
 
+import abc
+from typing import Any
+
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Result
 
@@ -7,18 +10,37 @@ from flask_forge.database.message import Message
 from flask_forge.database.user import User
 
 
-class UserRepository:
+class AbstractUserRepository(abc.ABC):
+    """An abstract repository user repository."""
+
+    @abc.abstractmethod
+    def add(self, user: User) -> None:
+        """Add a user to the repository."""
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_by_id(self, user_id: str) -> User | None:
+        """Fetch a user based on their ID."""
+        raise NotImplementedError
+
+
+class UserRepository(AbstractUserRepository):
     """Repository class for user database operations."""
 
     def __init__(self, db: SQLAlchemy):
         """Define the database this repository will use."""
         self.db = db
 
+    def add(self, user: User) -> None:
+        """Add a user to the database."""
+        self.db.session.add(user)
+        self.db.session.commit()
+
     def get_user(self, user_id: str) -> User | None:
         """Fetch a user based on their ID."""
         return self.db.session.query(User).get(user_id)
 
-    def get_users(self) -> [User]:
+    def get_users(self) -> Any:
         """Fetch all users from the database."""
         return self.db.session.query(User).all()
 
@@ -31,7 +53,6 @@ class UserRepository:
         """Delete a user based on their ID. Returns true if user was deleted."""
         if not (user := self.get_user(user_id)):
             return False
-
         self.db.session.delete(user)
         self.db.session.commit()
         return True
@@ -47,7 +68,7 @@ class UserRepository:
         self.db.session.commit()
         return user
 
-    def get_user_messages(self, user_id: str, limit: int) -> [Message]:
+    def get_user_messages(self, user_id: str, limit: int) -> Any:
         """Fetch messages sent to a user based on their ID.
 
         "limit" specifies the maximum number of messages to return.
