@@ -7,7 +7,7 @@ Submodules
 flask\_forge.config.monitoring module
 -------------------------------------
 
-.. automodule:: flask_forge.config.monitoring
+.. automodule:: aloysius_parker.config.monitoring
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ flask\_forge.config.monitoring module
 Module contents
 ---------------
 
-.. automodule:: flask_forge.config
+.. automodule:: aloysius_parker.config
    :members:
    :undoc-members:
    :show-inheritance:

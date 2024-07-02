@@ -5,8 +5,8 @@ from http import HTTPStatus
 import flask_smorest
 from flask import views
 
-from flask_forge.handler import users
-from flask_forge.models.user import UserSchema
+from aloysius_parker.handler import users
+from aloysius_parker.models.user import UserSchema
 
 SMOREST_USERS_BLUEPRINT = flask_smorest.Blueprint(
     "users", __name__, description="Management of the users."

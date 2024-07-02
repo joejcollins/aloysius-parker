@@ -7,7 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   flask_forge.examples.sqlalchemy.models
+   aloysius_parker.examples.sqlalchemy.models
 
 Submodules
 ----------
@@ -15,7 +15,7 @@ Submodules
 flask\_forge.examples.sqlalchemy.app module
 -------------------------------------------
 
-.. automodule:: flask_forge.examples.sqlalchemy.app
+.. automodule:: aloysius_parker.examples.sqlalchemy.app
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ flask\_forge.examples.sqlalchemy.app module
 flask\_forge.examples.sqlalchemy.db module
 ------------------------------------------
 
-.. automodule:: flask_forge.examples.sqlalchemy.db
+.. automodule:: aloysius_parker.examples.sqlalchemy.db
    :members:
    :undoc-members:
    :show-inheritance:
@@ -31,7 +31,7 @@ flask\_forge.examples.sqlalchemy.db module
 flask\_forge.examples.sqlalchemy.errors module
 ----------------------------------------------
 
-.. automodule:: flask_forge.examples.sqlalchemy.errors
+.. automodule:: aloysius_parker.examples.sqlalchemy.errors
    :members:
    :undoc-members:
    :show-inheritance:
@@ -39,7 +39,7 @@ flask\_forge.examples.sqlalchemy.errors module
 flask\_forge.examples.sqlalchemy.schemas module
 -----------------------------------------------
 
-.. automodule:: flask_forge.examples.sqlalchemy.schemas
+.. automodule:: aloysius_parker.examples.sqlalchemy.schemas
    :members:
    :undoc-members:
    :show-inheritance:
@@ -47,7 +47,7 @@ flask\_forge.examples.sqlalchemy.schemas module
 flask\_forge.examples.sqlalchemy.user module
 --------------------------------------------
 
-.. automodule:: flask_forge.examples.sqlalchemy.user
+.. automodule:: aloysius_parker.examples.sqlalchemy.user
    :members:
    :undoc-members:
    :show-inheritance:
@@ -55,7 +55,7 @@ flask\_forge.examples.sqlalchemy.user module
 Module contents
 ---------------
 
-.. automodule:: flask_forge.examples.sqlalchemy
+.. automodule:: aloysius_parker.examples.sqlalchemy
    :members:
    :undoc-members:
    :show-inheritance:

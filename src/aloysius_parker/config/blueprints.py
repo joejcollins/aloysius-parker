@@ -3,7 +3,7 @@
 import flask_smorest
 from flask import app
 
-from flask_forge.blueprints import convenience, home, user, users
+from aloysius_parker.blueprints import convenience, home, user, users
 
 
 def configure_blueprints(flask_api: app.Flask) -> None:

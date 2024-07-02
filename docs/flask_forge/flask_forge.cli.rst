@@ -7,7 +7,7 @@ Submodules
 flask\_forge.cli.main module
 ----------------------------
 
-.. automodule:: flask_forge.cli.main
+.. automodule:: aloysius_parker.cli.main
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ flask\_forge.cli.main module
 Module contents
 ---------------
 
-.. automodule:: flask_forge.cli
+.. automodule:: aloysius_parker.cli
    :members:
    :undoc-members:
    :show-inheritance:

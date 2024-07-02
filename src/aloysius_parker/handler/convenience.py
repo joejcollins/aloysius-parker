@@ -1,7 +1,7 @@
 """Handle functions for /blueprints/convenience.py."""
 
-from flask_forge.database.db import database
-from flask_forge.database.user import User
+from aloysius_parker.database.db import database
+from aloysius_parker.database.user import User
 
 
 def create_example_user():

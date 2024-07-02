@@ -6,7 +6,7 @@ from uuid import uuid4
 from sqlalchemy import Column, DateTime, ForeignKey, String
 from sqlalchemy.orm import relationship
 
-from flask_forge.database.db import database
+from aloysius_parker.database.db import database
 
 MAX_MESSAGE_LENGTH: int = 250
 

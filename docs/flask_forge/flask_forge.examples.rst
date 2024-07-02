@@ -7,14 +7,14 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   flask_forge.examples.blueprints
-   flask_forge.examples.simple_user_database
-   flask_forge.examples.sqlalchemy
+   aloysius_parker.examples.blueprints
+   aloysius_parker.examples.simple_user_database
+   aloysius_parker.examples.sqlalchemy
 
 Module contents
 ---------------
 
-.. automodule:: flask_forge.examples
+.. automodule:: aloysius_parker.examples
    :members:
    :undoc-members:
    :show-inheritance:

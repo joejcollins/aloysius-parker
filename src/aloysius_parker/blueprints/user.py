@@ -5,13 +5,13 @@ from http import HTTPStatus
 import flask_smorest
 from flask import views
 
-from flask_forge.handler import user
-from flask_forge.models.message import (
+from aloysius_parker.handler import user
+from aloysius_parker.models.message import (
     DeleteMessageSchemaArguments,
     GetMessageSchemaArguments,
     PostMessageSchema,
 )
-from flask_forge.models.user import UserPatchSchema
+from aloysius_parker.models.user import UserPatchSchema
 
 SMOREST_USER_BLUEPRINT = flask_smorest.Blueprint(
     "user", __name__, description="Management of individual users."

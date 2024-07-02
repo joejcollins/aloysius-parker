@@ -4,7 +4,7 @@ from http import HTTPStatus
 from typing import Generator
 
 import pytest
-from flask_forge.extensions import retrying_http_client
+from aloysius_parker.extensions import retrying_http_client
 
 from tests.e2e import subprocess
 
@@ -20,7 +20,7 @@ def start_flask_server() -> Generator:
     yield from subprocess.run_subprocess(
         [
             ".venv/bin/python",
-            "src/flask_forge/main.py",
+            "src/aloysius_parker/main.py",
         ]
     )
 

@@ -9,7 +9,7 @@ from typing import Generator
 
 import pytest
 from flask import testing
-from flask_forge import main
+from aloysius_parker import main
 
 
 # region Fixtures and helper functions

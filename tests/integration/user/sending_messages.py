@@ -6,8 +6,8 @@ from typing import Generator
 
 import pytest
 from flask import testing
-from flask_forge import main
-from flask_forge.database.user import User
+from aloysius_parker import main
+from aloysius_parker.database.user import User
 
 
 # region Fixtures and helper functions
@@ -43,7 +43,7 @@ def create_flask_client() -> Generator:
 def test_001_create_users(
     flask_client: testing.FlaskClient, resources: SharedResources
 ) -> None:
-    """Create the first ever humans in flask-forge-land."""
+    """Create the first ever humans in aloysius-parker-land."""
     # Arrange 2 user accounts
     data_user_1 = {"name": "Adam", "email": "adam@gmail.com"}
     data_user_2 = {"name": "Eve", "email": "eve@mail.ru"}

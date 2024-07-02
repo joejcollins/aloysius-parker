@@ -6,7 +6,7 @@ import logging
 import requests
 import responses
 from _pytest.logging import LogCaptureFixture
-from flask_forge.extensions import retrying_http_client
+from aloysius_parker.extensions import retrying_http_client
 
 
 @responses.activate

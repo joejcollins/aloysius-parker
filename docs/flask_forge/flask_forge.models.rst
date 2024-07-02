@@ -4,7 +4,7 @@ flask\_forge.models package
 Module contents
 ---------------
 
-.. automodule:: flask_forge.models
+.. automodule:: aloysius_parker.models
    :members:
    :undoc-members:
    :show-inheritance:

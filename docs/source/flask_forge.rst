@@ -7,7 +7,7 @@ Submodules
 flask\_forge.dummy module
 -------------------------
 
-.. automodule:: flask_forge.dummy
+.. automodule:: aloysius_parker.dummy
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ flask\_forge.dummy module
 Module contents
 ---------------
 
-.. automodule:: flask_forge
+.. automodule:: aloysius_parker
    :members:
    :undoc-members:
    :show-inheritance:

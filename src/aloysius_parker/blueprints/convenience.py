@@ -3,7 +3,7 @@
 import flask_smorest
 from flask import views
 
-from flask_forge.handler import convenience
+from aloysius_parker.handler import convenience
 
 SMOREST_CONVENIENCE_BLUEPRINT = flask_smorest.Blueprint(
     "convenience", __name__, description="Quality of life convenience functionality"

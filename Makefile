@@ -20,20 +20,20 @@ compile:  # Compile the requirements files using pip-tools.
 
 docker:  # Build the dev image.
 	docker build \
-		-t ghcr.io/zengenti/flask-forge-dev:latest \
+		-t ghcr.io/zengenti/aloysius-parker-dev:latest \
 		-f Dockerfile.dev \
 		.
 	echo $$REPO_AND_PACKAGES_TOKEN | docker login ghcr.io -u joejcollins --password-stdin
-	docker push ghcr.io/zengenti/flask-forge-dev:latest
+	docker push ghcr.io/zengenti/aloysius-parker-dev:latest
 
 .PHONY: docs  # because there is a directory called docs.
 docs:  # Build the documentation from the comments and documents.
 	export TZ=UTC
-	sphinx-apidoc -o docs/flask_forge src/flask_forge
+	sphinx-apidoc -o docs/aloysius_parker src/aloysius_parker
 	sphinx-autobuild docs docs/_build/html
 
 flask:  # Run the Flask API server.
-	.venv/bin/python -m flask --app 'src/flask_forge/main.py' run
+	.venv/bin/python -m flask --app 'src/aloysius_parker/main.py' run
 
 format:  # Format the code with black.
 	.venv/bin/python -m black --config pyproject.toml .

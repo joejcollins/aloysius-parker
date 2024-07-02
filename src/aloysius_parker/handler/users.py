@@ -4,8 +4,8 @@ from http import HTTPStatus
 
 from sqlalchemy.exc import SQLAlchemyError
 
-from flask_forge.database.db import database
-from flask_forge.database.user import User
+from aloysius_parker.database.db import database
+from aloysius_parker.database.user import User
 
 
 def get_users():

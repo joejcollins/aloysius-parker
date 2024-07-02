@@ -2,10 +2,10 @@
 
 from http import HTTPStatus
 
-from flask_forge.database.db import database
-from flask_forge.database.message import Message
-from flask_forge.database.user import User
-from flask_forge.database.user_repository import UserRepository
+from aloysius_parker.database.db import database
+from aloysius_parker.database.message import Message
+from aloysius_parker.database.user import User
+from aloysius_parker.database.user_repository import UserRepository
 
 USERS = UserRepository(database)
 GET_MESSAGES_MIN_LIMIT: int = 1

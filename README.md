@@ -1,4 +1,4 @@
-# flask-forge
+# aloysius-parker
 
 > Flask API training project, based on **[this Udemy course.](https://www.udemy.com/course/rest-api-flask-and-python/)** and the **[official documentation site](https://flask.palletsprojects.com/en/3.0.x/quickstart/)**
 

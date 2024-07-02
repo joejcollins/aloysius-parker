@@ -15,16 +15,16 @@ flask==3.0.3
     #   flask-cors
     #   flask-smorest
     #   flask-sqlalchemy
-    #   flask_forge (pyproject.toml)
+    #   aloysius_parker (pyproject.toml)
     #   prometheus-flask-exporter
 flask-cors==4.0.1
-    # via flask_forge (pyproject.toml)
+    # via aloysius_parker (pyproject.toml)
 flask-smorest==0.44.0
-    # via flask_forge (pyproject.toml)
+    # via aloysius_parker (pyproject.toml)
 flask-sqlalchemy==3.1.1
-    # via flask_forge (pyproject.toml)
+    # via aloysius_parker (pyproject.toml)
 gunicorn==22.0.0
-    # via flask_forge (pyproject.toml)
+    # via aloysius_parker (pyproject.toml)
 itsdangerous==2.2.0
     # via flask
 jinja2==3.1.4
@@ -47,7 +47,7 @@ packaging==24.0
 prometheus-client==0.20.0
     # via prometheus-flask-exporter
 prometheus-flask-exporter==0.23.0
-    # via flask_forge (pyproject.toml)
+    # via aloysius_parker (pyproject.toml)
 sqlalchemy==2.0.30
     # via flask-sqlalchemy
 typing-extensions==4.11.0

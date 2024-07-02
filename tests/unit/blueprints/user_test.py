@@ -8,8 +8,8 @@ import pytest
 from _pytest.monkeypatch import MonkeyPatch
 from flask import app as flask_app
 from flask.testing import FlaskClient
-from flask_forge import main
-from flask_forge.database import user
+from aloysius_parker import main
+from aloysius_parker.database import user
 from sqlalchemy.orm import scoping
 
 

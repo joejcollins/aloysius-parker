@@ -2,8 +2,8 @@
 
 from flask import Flask
 
-from flask_forge.config import blueprints, monitoring, open_api
-from flask_forge.database.db import database
+from aloysius_parker.config import blueprints, monitoring, open_api
+from aloysius_parker.database.db import database
 
 
 def create_app() -> Flask:

@@ -6,7 +6,7 @@ import flask
 import pytest
 from flask import app as flask_app
 from flask.testing import FlaskClient
-from flask_forge import main
+from aloysius_parker import main
 
 
 @pytest.fixture()

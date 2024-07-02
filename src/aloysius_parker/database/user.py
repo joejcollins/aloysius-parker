@@ -6,8 +6,8 @@ from json import loads
 from marshmallow import ValidationError
 from sqlalchemy import Column, String
 
-from flask_forge.database.db import database
-from flask_forge.database.message import Message
+from aloysius_parker.database.db import database
+from aloysius_parker.database.message import Message
 
 
 class User(database.Model):

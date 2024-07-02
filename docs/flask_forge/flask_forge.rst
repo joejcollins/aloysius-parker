@@ -7,10 +7,10 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   flask_forge.cli
-   flask_forge.config
-   flask_forge.examples
-   flask_forge.models
+   aloysius_parker.cli
+   aloysius_parker.config
+   aloysius_parker.examples
+   aloysius_parker.models
 
 Submodules
 ----------
@@ -18,7 +18,7 @@ Submodules
 flask\_forge.main module
 ------------------------
 
-.. automodule:: flask_forge.main
+.. automodule:: aloysius_parker.main
    :members:
    :undoc-members:
    :show-inheritance:
@@ -26,7 +26,7 @@ flask\_forge.main module
 Module contents
 ---------------
 
-.. automodule:: flask_forge
+.. automodule:: aloysius_parker
    :members:
    :undoc-members:
    :show-inheritance:

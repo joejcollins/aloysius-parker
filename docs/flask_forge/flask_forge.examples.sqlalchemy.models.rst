@@ -7,7 +7,7 @@ Submodules
 flask\_forge.examples.sqlalchemy.models.user module
 ---------------------------------------------------
 
-.. automodule:: flask_forge.examples.sqlalchemy.models.user
+.. automodule:: aloysius_parker.examples.sqlalchemy.models.user
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ flask\_forge.examples.sqlalchemy.models.user module
 Module contents
 ---------------
 
-.. automodule:: flask_forge.examples.sqlalchemy.models
+.. automodule:: aloysius_parker.examples.sqlalchemy.models
    :members:
    :undoc-members:
    :show-inheritance:
